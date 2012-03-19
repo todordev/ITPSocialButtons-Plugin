@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="content" method="upgrade">
+    <name>Content - ITPSocialButtons</name>
+    <author>Todor Iliev</author>
+    <creationDate>September, 2010</creationDate>
+    <copyright>Copyright (C) 2010 Todor Iliev ( ITPrism.com ). All rights reserved.</copyright>
+    <license>http://www.gnu.org/copyleft/gpl.html</license>
+    <authorEmail>todor@itprism.com</authorEmail>
+    <authorUrl>http://itprism.com</authorUrl>
+    <version>1.8</version>
+    <description>
+	<![CDATA[
+	<p><a href="http://itprism.com/free-joomla-extensions/social-buttons-plugin">ITPSocialButtons</a> is a plugin that adds social network buttons on your page.</p>
+	<p>Invest in the extension improvement and <a href="http://itprism.com/sponsorship" title="Sponsoring" target="_blank">sponsor it via SMS or PayPal</a>.</p>
+	<p>Please, vote for the plugin on <a href="http://extensions.joomla.org/extensions/social-web/social-bookmarking/14094">Joomla! Extensions Directory</a></p>
+	]]>
+	</description>
+	<languages>
+		<language client="administrator" tag="en-GB">en-GB.plg_itpsocialbuttons.ini</language>
+	</languages>
+    <files>
+        <filename plugin="itpsocialbuttons">itpsocialbuttons.php</filename>
+		<filename>index.html</filename>
+		<filename>style.css</filename>
+		<filename>itpshorturlsocialbuttons.php</filename>
+		<folder>images</folder>
+    </files>
+    <config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="style" type="list" default="big" label="Style" description="Choose from these icon styles." >
+				   <option value="big">Big buttons</option>
+				   <option value="small">Small buttons</option>
+				   <option value="texto">Texto</option>
+				   <option value="balloon">Balloon</option>
+				   <option value="handdrawn">Handdrawn</option>
+				   <option value="elegant">Elegant</option>
+				   <option value="aquaticus">Aquaticus</option>
+				   <option value="aquasmall">Small Aquaticus</option>
+				   <option value="circular64">Circular 64px</option>
+				   <option value="circular32">Circular 32px</option>
+				   <option value="umar">Umar</option>
+				   <option value="classy">Classy</option>
+                   <option value="drink">Drink</option>
+                   <option value="buddycircular">Buddy Circular</option>
+		           <option value="buddyrounded">Buddy Rounded</option>
+		           <option value="isometrica">Isometrica</option>
+		           <option value="isometricasmall">Isometrica Small</option>
+		           <option value="vector">Vector Social Icons</option>
+		           <option value="wpzoom24">WP Zoom 24x24px</option>
+		           <option value="wpzoom32">WP Zoom 32x32px</option>
+		           <option value="wpzoom48">WP Zoom 48x48px</option>
+		           <option value="wpzoom64">WP Zoom 64x64px</option>
+				</field>
+				<field name="position" type="list" default="2" label="Position" description="Choose the positions of the icons into your article." >
+				   <option value="1">Top</option>
+				   <option value="2">Bottom</option>
+				   <option value="0">Both</option>
+				</field>
+				
+				<field name="showInArticles" type="radio" default="1" label="Show in articles" description="Display buttons in the view 'article'." >
+                   <option value="0">No</option>
+                   <option value="1">Yes</option>
+                </field>
+				<field name="excludeCats" type="text" default="" size="100" 
+						label="Exclude categories"
+						description="List with excluded categories divided by comma. Enter categories IDs." />
+				<field name="excludeArticles" type="text" default="" size="100"
+							label="Exclude articles"
+							description="List of excluded articles divided by comma. Enter articles IDs." />
+				
+				<field name="includeArticles" type="text" default="" size="100"
+                label="Display in that articles"
+                description="Displays the buttons in these articles notwithstanding the exclusion settings. You must enter the IDs of articles, didived by comma." />
+                			
+				<field name="showTitle" type="radio" default="1" label="Show title" description="Display the title which is located on the top of the icons." >
+				   <option value="0">No</option>
+				   <option value="1">Yes</option>
+				</field>
+				<field name="title" type="text" default="Share this post" size="100" 
+						label="Title"
+						description="The title which is located on the top of the icons." />
+				
+				<field name="displayLines" type="list" default="itp-sbb-bothl" label="Display lines" description="Shows or hide dividing lines which will be appear in above or below the icons." >
+				   <option value="itp-sbb-nl">None</option>
+				   <option value="itp-sbb-tl">Only Top</option>
+				   <option value="itp-sbb-bl">Only Bottom</option>
+				   <option value="itp-sbb-bothl">Both</option>
+				</field>
+				
+				<field name="displayIcons" type="list" default="itp-sbb-left" label="Icons position" description="This is a position of the icons." >
+				   <option value="itp-sb-left">Left</option>
+				   <option value="itp-sb-right">Right</option>
+				   <option value="itp-sb-center">Center</option>
+				</field>
+				
+				<field name="displayDelicious" type="radio" default="1" label="Display Delicious" description="Show or Hide Delicious button." >
+		           <option value="0">No</option>
+		           <option value="1">Yes</option>
+		        </field>
+		        <field name="displayDigg" type="radio" default="1" label="Display Digg" description="Show or Hide Digg button." >
+		           <option value="0">No</option>
+		           <option value="1">Yes</option>
+		        </field>
+		        <field name="displayFacebook" type="radio" default="1" label="Display Facebook" description="Show or Hide Facebook button." >
+		           <option value="0">No</option>
+		           <option value="1">Yes</option>
+		        </field>
+		        <field name="displayGoogle" type="radio" default="1" label="Display Google" description="Show or Hide Google button." >
+		           <option value="0">No</option>
+		           <option value="1">Yes</option>
+		        </field>
+		        <field name="displayLinkedIn" type="radio" default="1" label="Display LinkedIn" description="Show or Hide LinkedIn button." >
+		           <option value="0">No</option>
+		           <option value="1">Yes</option>
+		        </field>
+		        <field name="displaySumbleUpon" type="radio" default="1" label="Display SumbleUpon" description="Show or Hide SumbleUpon button." >
+		           <option value="0">No</option>
+		           <option value="1">Yes</option>
+		        </field>
+		        <field name="displayTechnorati" type="radio" default="1" label="Display Technorati" description="Show or Hide Technorati button." >
+		           <option value="0">No</option>
+		           <option value="1">Yes</option>
+		        </field>
+		        <field name="displayTwitter" type="radio" default="1" label="Display Twitter" description="Show or Hide Twitter button." >
+		           <option value="0">No</option>
+		           <option value="1">Yes</option>
+		        </field>
+			</fieldset>
+			
+			<fieldset name="advanced">
+				<field name="spacer1" type="spacer" class="text" label="############# SHORTENER URL SETTINGS #############"  />
+				
+		        <field name="login" type="text" default="" label="Login" description="Username for the shortener URL service."/>
+		        <field name="apiKey" type="text" default="" size="100" label="API key" description="An API key for the shortener URL serivce."/>
+		        <field name="shortUrlService" type="list" default="" label="Shortener service" description="You can select a shortener URL service. To work properly, a PHP option 'allow_url_fopen' must be enabled. You must enable PHP curl for Google shortener serice." >
+		           <option value="">None</option>
+		           <option value="bitly">bit.ly</option>
+		           <option value="tinycc">tiny.cc</option>
+		           <option value="jmp">j.mp</option>
+		        </field>
+		        
+		        <field name="spacer2" type="spacer" class="text" label="############# EXTRA BUTTONS SETTINGS #############" />
+	        
+                <field name="ebuttons1" type="textarea" default="" label="Button code 1" description="Insert an extra button code that will be included. If you need to specify a URL or title, use {URL} and {TITLE} for that." cols="50" rows="10" filter="raw" />
+                <field name="ebuttons2" type="textarea" default="" label="Button code 2" description="Insert an extra button code that will be included. If you need to specify a URL or title, use {URL} and {TITLE} for that." cols="50" rows="10" filter="raw" />
+                <field name="ebuttons3" type="textarea" default="" label="Button code 3" description="Insert an extra button code that will be included. If you need to specify a URL or title, use {URL} and {TITLE} for that." cols="50" rows="10" filter="raw" />
+                <field name="ebuttons4" type="textarea" default="" label="Button code 4" description="Insert an extra button code that will be included. If you need to specify a URL or title, use {URL} and {TITLE} for that." cols="50" rows="10" filter="raw" />
+                <field name="ebuttons5" type="textarea" default="" label="Button code 5" description="Insert an extra button code that will be included. If you need to specify a URL or title, use {URL} and {TITLE} for that." cols="50" rows="10" filter="raw" />
+            </fieldset>
+             
+        </fields>
+	</config>
+</extension>
