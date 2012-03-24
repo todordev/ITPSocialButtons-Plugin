@@ -10,9 +10,6 @@
  * other free or open source software licenses.
  */
 
-// Check to ensure this file is included in Joomla!
-defined('_JEXEC') or die;
-
 class ItpShortUrlSocialButtons extends JObject{
     
     private $url;
