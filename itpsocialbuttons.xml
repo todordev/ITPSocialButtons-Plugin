@@ -13,7 +13,7 @@
 	<p><a href="http://itprism.com/free-joomla-extensions/social-buttons-plugin" target="_blank">ITPSocialButtons</a> is a plugin that adds social network buttons on your page.</p>
 	<p>Invest in the extension improvement and <a href="http://itprism.com/sponsorship" title="Sponsoring" target="_blank">sponsor it via SMS or PayPal</a>.</p>
 	<p><a href="http://itprism.com/" target="_blank">Subscribe for the newsletter</a> to receive information about updates and new ITPrism extensions.</p>
-	<p>Please, vote for the plugin on <a href="http://extensions.joomla.org/extensions/social-web/social-bookmarking/14094">Joomla! Extensions Directory</a></p>
+	<p>Please, vote for the plugin on <a href="http://extensions.joomla.org/extensions/social-web/social-bookmarking/14094" target="_blank">Joomla! Extensions Directory</a></p>
 	]]>
 	</description>
 	<languages>
@@ -126,7 +126,7 @@
 			
 			<fieldset name="advanced">
 			
-			     <field name="spacer12" type="spacer" class="text" label="############# JOOMLA CONTENT ( com_content ) SETTINGS #############" />
+			     <field name="spacer1" type="spacer" class="text" label="############# JOOMLA CONTENT ( com_content ) SETTINGS #############" />
                 <field name="showInArticles" type="radio" default="1" label="Show in articles" description="Display buttons in view 'article'." >
                    <option value="0">No</option>
                    <option value="1">Yes</option>
@@ -153,7 +153,7 @@
                 label="Display in these articles"
                 description="Displays the buttons in these articles notwithstanding the exclusion settings. You must enter the IDs of articles." />
                 
-                <field name="spacer13" type="spacer" class="text" label="############# K2 ( com_k2 ) SETTINGS #############" />
+                <field name="spacer2" type="spacer" class="text" label="############# K2 ( com_k2 ) SETTINGS #############" />
                 <field name="k2DisplayInArticles" type="radio" default="1" label="Display in articles" description="Setting this to true and the buttons will be displayed on article page." >
                    <option value="0">No</option>
                    <option value="1">Yes</option>
@@ -164,19 +164,19 @@
                    <option value="1">Yes</option>
                 </field>
                 
-                <field name="spacer14" type="spacer" class="text" label="############# VIRTUEMART ( com_virtuemart ) SETTINGS #############" />
+                <field name="spacer3" type="spacer" class="text" label="############# VIRTUEMART ( com_virtuemart ) SETTINGS #############" />
                 <field name="vmDisplayInDetails" type="radio" default="1" label="Display in details" description="Setting this to true and the buttons will be displayed on details page." >
                    <option value="0">No</option>
                    <option value="1">Yes</option>
                 </field>
                 
-                <field name="spacer15" type="spacer" class="text" label="############# JEVENTS ( com_jevents ) SETTINGS #############" />
+                <field name="spacer4" type="spacer" class="text" label="############# JEVENTS ( com_jevents ) SETTINGS #############" />
                 <field name="jeDisplayInEvents" type="radio" default="1" label="Display in events" description="Display buttons on event details page." >
                    <option value="0">No</option>
                    <option value="1">Yes</option>
                 </field>
                     
-				<field name="spacer1" type="spacer" class="text" label="############# SHORTENER URL SETTINGS #############"  />
+				<field name="spacer5" type="spacer" class="text" label="############# SHORTENER URL SETTINGS #############"  />
 		        <field name="login" type="text" default="" label="Login" description="Username for the shortener URL service."/>
 		        <field name="apiKey" type="text" default="" size="80" label="API key" description="An API key for the shortener URL serivce."/>
 		        <field name="shortUrlService" type="list" default="" label="Shortener service" description="You can select a shortener URL service. To work properly, a PHP option 'allow_url_fopen' must be enabled. You must enable PHP curl for Google shortener serice." >
@@ -186,13 +186,13 @@
 		           <option value="jmp">j.mp</option>
 		        </field>
 		        
-		        <field name="spacer21" type="spacer" class="text" label="############# ITPSocialButtons SETTINGS #############" />
+		        <field name="spacer6" type="spacer" class="text" label="############# ITPSocialButtons SETTINGS #############" />
                 <field name="loadCss" type="radio" default="1" label="Load style.css" description="The style.css is a file that conations button position and some styles for the icons. You can disable the file loading if you have your ones.">
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
                 </field>
                 
-		        <field name="spacer2" type="spacer" class="text" label="############# EXTRA BUTTONS SETTINGS #############" />
+		        <field name="spacer7" type="spacer" class="text" label="############# ADDITIONAL BUTTONS SETTINGS #############" />
                 <field name="ebuttons1" type="textarea" default="" label="Custom code 1" description="Insert an additional button code that will be included. If you need to specify a URL or title, use {URL} and {TITLE} for that." cols="50" rows="10" filter="raw" />
                 <field name="ebuttons2" type="textarea" default="" label="Custom code 2" description="Insert an additional button code that will be included. If you need to specify a URL or title, use {URL} and {TITLE} for that." cols="50" rows="10" filter="raw" />
                 <field name="ebuttons3" type="textarea" default="" label="Custom code 3" description="Insert an additional button code that will be included. If you need to specify a URL or title, use {URL} and {TITLE} for that." cols="50" rows="10" filter="raw" />

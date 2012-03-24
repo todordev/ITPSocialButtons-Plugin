@@ -1,12 +1,13 @@
-ITPShare Plugin for Joomla! 
+ITPSocialButtons Plugin for Joomla! 
 ==========================
-( Version 2.1 )
+( Version 1.8 )
 --------------------------
-
-
 
 Changelog
 ---------
+
+Version 1.8
+-------------
 
 * Works with K2, JEvents and VirtueMart
 * The buttons appear on the front page ( on the featured articles )

@@ -26,7 +26,7 @@ jimport('joomla.plugin.plugin');
  */
 class plgContentITPSocialButtons extends JPlugin {
     
-	private $plgUrlPath = "";
+	private $plgUrlPath 	= "";
 	private $currentView    = "";
     private $currentTask    = "";
     private $currentOption  = "";
@@ -49,10 +49,10 @@ class plgContentITPSocialButtons extends JPlugin {
             return;
         }
       
-       $this->plgUrlPath =  JURI::root() . "plugins/content/itpsocialbuttons/";
-       $this->currentView    = JRequest::getCmd("view");
-       $this->currentTask    = JRequest::getCmd("task");
-       $this->currentOption  = JRequest::getCmd("option");
+       $this->plgUrlPath 	 =  JURI::root() . "plugins/content/itpsocialbuttons/";
+       $this->currentView    =  JRequest::getCmd("view");
+       $this->currentTask    =  JRequest::getCmd("task");
+       $this->currentOption  =  JRequest::getCmd("option");
     }
     
     /**
@@ -407,12 +407,10 @@ class plgContentITPSocialButtons extends JPlugin {
      */
     private function getContent(&$article){
         
-        $url  = $this->getUrl($article);
-        $title= $this->getTitle($article);
+        $url  = rawurlencode( $this->getUrl($article) );
+        $title= rawurlencode( $this->getTitle($article) );
         
-        $html = "";
-        
-        $html .= '<div class="itp-social-buttons-box">';
+        $html 	= '<div class="itp-social-buttons-box">';
         
         if($this->params->get('showTitle')){
             $html .= '<h4>' . $this->params->get('title') . '</h4>';
