@@ -18,7 +18,6 @@
 	</description>
 	<languages>
 		<language tag="en-GB">en-GB.plg_itpsocialbuttons.ini</language>
-		<language tag="en-GB">en-GB.plg_itpsocialbuttons.sys.ini</language>
 	</languages>
     <files>
         <filename plugin="itpsocialbuttons">itpsocialbuttons.php</filename>
@@ -60,6 +59,14 @@
 		           <option value="wpzoom32">WP Zoom 32x32px</option>
 		           <option value="wpzoom48">WP Zoom 48x48px</option>
 		           <option value="wpzoom64">WP Zoom 64x64px</option>
+		           <option value="naqvi">Naqvi</option>
+		           <option value="neon">Neon</option>
+		           <option value="socialclean32">Social Clean 32x32px</option>
+		           <option value="socialclean48">Social Clean 48x48px</option>
+		           <option value="infocus1">In Focus 1</option>
+		           <option value="infocus2">In Focus 2</option>
+		           <option value="socialshift32">Social Shift 32x32px</option>
+		           <option value="socialshift64">Social Shift 64x64px</option>
 				</field>
 
 				<field name="showTitle" type="radio" default="1" label="Display title" description="Display the title which is located on the top of the icons." >

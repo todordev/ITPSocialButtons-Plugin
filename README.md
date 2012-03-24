@@ -10,6 +10,7 @@ Changelog
 
 * Works with K2, JEvents and VirtueMart
 * The buttons appear on the front page ( on the featured articles )
+* Added new icons packs
 
 Version 1.7
 -------------
