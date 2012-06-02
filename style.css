@@ -10,9 +10,19 @@
 	margin-bottom: 10px;
 }
 
-.itp-social-buttons-box img{
+.itp-sb-left img{
 	border:0 !important;
 	margin-right: 5px;
+}
+
+.itp-sb-right img{
+	border:0 !important;
+	margin-left: 5px;
+}
+
+.itp-sb-center img{
+	border:0 !important;
+	margin-left: 5px;
 }
 
 .itp-sbb-nl{
