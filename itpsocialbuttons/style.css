@@ -10,6 +10,22 @@
 	margin-bottom: 10px;
 }
 
+
+.itp-sb-left a{
+	border:0 !important;
+	margin-right: 5px;
+}
+
+.itp-sb-right a{
+	border:0 !important;
+	margin-left: 5px;
+}
+
+.itp-sb-center a{
+	border:0 !important;
+	margin-left: 5px;
+}
+
 .itp-sbb-nl{
   border-top: none;
   border-bottom: none;
