@@ -7,7 +7,7 @@
     <license>http://www.gnu.org/copyleft/gpl.html</license>
     <authorEmail>todor@itprism.com</authorEmail>
     <authorUrl>http://itprism.com</authorUrl>
-    <version>1.8</version>
+    <version>1.9</version>
     <description>
 	<![CDATA[
 	<p><a href="http://itprism.com/free-joomla-extensions/social-buttons-plugin" target="_blank">ITPSocialButtons</a> is a plugin that adds social network buttons on your page.</p>
@@ -155,28 +155,34 @@
                 
                 <field name="spacer2" type="spacer" class="text" label="############# K2 ( com_k2 ) SETTINGS #############" />
                 <field name="k2DisplayInArticles" type="radio" default="1" label="Display in articles" description="Setting this to true and the buttons will be displayed on article page." >
-                   <option value="0">No</option>
-                   <option value="1">Yes</option>
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
                 </field>
                 
                 <field name="k2DisplayInItemlist" type="radio" default="1" label="Display in categories" description="Setting this to true and the buttons will be displayed on categories page." >
-                   <option value="0">No</option>
-                   <option value="1">Yes</option>
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
                 </field>
                 
                 <field name="spacer3" type="spacer" class="text" label="############# VIRTUEMART ( com_virtuemart ) SETTINGS #############" />
                 <field name="vmDisplayInDetails" type="radio" default="1" label="Display in details" description="Setting this to true and the buttons will be displayed on details page." >
-                   <option value="0">No</option>
-                   <option value="1">Yes</option>
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
                 </field>
                 
                 <field name="spacer4" type="spacer" class="text" label="############# JEVENTS ( com_jevents ) SETTINGS #############" />
                 <field name="jeDisplayInEvents" type="radio" default="1" label="Display in events" description="Display buttons on event details page." >
-                   <option value="0">No</option>
-                   <option value="1">Yes</option>
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
                 </field>
                     
-				<field name="spacer5" type="spacer" class="text" label="############# SHORTENER URL SETTINGS #############"  />
+                <field name="spacer5" type="spacer" class="text" label="############# VIP PORTFOLIO ( com_vipportfolio ) SETTINGS #############" />
+                <field name="vipportfolio_lineal" type="radio" default="1" label="Display in lineal" description="The buttons will be displayed on Lineal layout page." >
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
+                </field>
+                
+				<field name="spacer6" type="spacer" class="text" label="############# SHORTENER URL SETTINGS #############"  />
 		        <field name="login" type="text" default="" label="Login" description="Username for the shortener URL service."/>
 		        <field name="apiKey" type="text" default="" size="80" label="API key" description="An API key for the shortener URL serivce."/>
 		        <field name="shortUrlService" type="list" default="" label="Shortener service" description="You can select a shortener URL service. To work properly, a PHP option 'allow_url_fopen' must be enabled. You must enable PHP curl for Google shortener serice." >
@@ -186,13 +192,13 @@
 		           <option value="jmp">j.mp</option>
 		        </field>
 		        
-		        <field name="spacer6" type="spacer" class="text" label="############# ITPSocialButtons SETTINGS #############" />
+		        <field name="spacer7" type="spacer" class="text" label="############# ITPSocialButtons SETTINGS #############" />
                 <field name="loadCss" type="radio" default="1" label="Load style.css" description="The style.css is a file that conations button position and some styles for the icons. You can disable the file loading if you have your ones.">
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
                 </field>
                 
-		        <field name="spacer7" type="spacer" class="text" label="############# ADDITIONAL BUTTONS SETTINGS #############" />
+		        <field name="spacer8" type="spacer" class="text" label="############# ADDITIONAL BUTTONS SETTINGS #############" />
                 <field name="ebuttons1" type="textarea" default="" label="Custom code 1" description="Insert an additional button code that will be included. If you need to specify a URL or title, use {URL} and {TITLE} for that." cols="50" rows="10" filter="raw" />
                 <field name="ebuttons2" type="textarea" default="" label="Custom code 2" description="Insert an additional button code that will be included. If you need to specify a URL or title, use {URL} and {TITLE} for that." cols="50" rows="10" filter="raw" />
                 <field name="ebuttons3" type="textarea" default="" label="Custom code 3" description="Insert an additional button code that will be included. If you need to specify a URL or title, use {URL} and {TITLE} for that." cols="50" rows="10" filter="raw" />
