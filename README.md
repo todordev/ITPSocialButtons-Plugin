@@ -10,7 +10,8 @@ Version 1.9
 -------------
 * Removed white space and fixed some css issues. Thanks Kurtis LoVerde.
 * Added new URL shortener services - goo.gl and bitly.com.
-* Fixed shortener services 
+* Fixed shortener services
+* Fixed a CSS issue that displays a line on a wrong place when the buttons are aligned left/right.  
 * Improved language
 
 Version 1.8

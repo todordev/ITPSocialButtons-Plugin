@@ -53,12 +53,12 @@
 
 
 .itp-sb-left{
-	float:left;
 	padding-top: 10px;
+	text-align: left;
 }
 
 .itp-sb-right{
-    float:right;
+    text-align: right;
     padding-top: 10px;
 }
 
