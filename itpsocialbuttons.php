@@ -88,7 +88,7 @@ class plgContentITPSocialButtons extends JPlugin {
         if($this->isRestricted($article, $context)) {
         	return;
         }
-        
+       
         if($this->params->get("loadCss")) {
             $doc->addStyleSheet(JURI::root() . "plugins/content/itpsocialbuttons/style.css");
         }
@@ -99,7 +99,7 @@ class plgContentITPSocialButtons extends JPlugin {
         // Generate content
         $content = $this->getContent($article, $context);
         $position = $this->params->get('position');
-        
+	
         switch($position){
             case 1:
                 $article->text = $content . $article->text;
