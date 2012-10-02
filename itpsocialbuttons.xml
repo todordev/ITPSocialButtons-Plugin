@@ -11,6 +11,7 @@
     <description>PLG_CONTENT_ITPSOCIALBUTTONS_DESC</description>
 	<languages folder="language">
 		<language tag="en-GB">en-GB/en-GB.plg_content_itpsocialbuttons.ini</language>
+		<language tag="en-GB">en-GB/en-GB.plg_content_itpsocialbuttons.sys.ini</language>
 	</languages>
     <files>
         <filename plugin="itpsocialbuttons">itpsocialbuttons.php</filename>
@@ -167,7 +168,7 @@
                    <option value="1">JYES</option>
                 </field>
                     
-                <field name="spacer17" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_EASYBLOG_SETTINGS" />
+                <field name="spacer5" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_EASYBLOG_SETTINGS" />
                 <field name="ebDisplayInEntry" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ENTRY" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ENTRY_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
@@ -185,19 +186,19 @@
                    <option value="1">JYES</option>
                 </field>
                 
-                <field name="spacer18" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_MYBLOG_SETTINGS" />
+                <field name="spacer6" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_MYBLOG_SETTINGS" />
                 <field name="mbDisplay" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_POST" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_POST_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
                 
-                <field name="spacer5" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIPPORTFOLIO_SETTINGS" />
+                <field name="spacer7" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIPPORTFOLIO_SETTINGS" />
                 <field name="vipportfolio_lineal" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LINEAL" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LINEAL_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
                 
-				<field name="spacer6" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHORTENER_SETTINGS"  />
+				<field name="spacer8" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHORTENER_SETTINGS"  />
 		        <field name="login" type="text" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_LOGIN" description="PLG_CONTENT_ITPSOCIALBUTTONS_LOGIN_DESC"/>
 		        <field name="apiKey" type="text" default="" size="80" label="PLG_CONTENT_ITPSOCIALBUTTONS_API_KEY" description="PLG_CONTENT_ITPSOCIALBUTTONS_API_KEY_DESC"/>
 		        <field name="shortUrlService" type="list" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHORTENER_SERVICE" description="PLG_CONTENT_ITPSOCIALBUTTONS_SHORTENER_SERVICE_DESC" >
@@ -209,13 +210,13 @@
                    <option value="tinycc">tiny.cc</option>
 		        </field>
 		        
-		        <field name="spacer7" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_SOCIALBUTTONS_SETTINGS" />
+		        <field name="spacer9" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_SOCIALBUTTONS_SETTINGS" />
                 <field name="loadCss" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE_DESC">
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
                 </field>
                 
-		        <field name="spacer8" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_ADDITIONAL_BUTTONS" />
+		        <field name="spacer10" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_ADDITIONAL_BUTTONS" />
                 <field name="ebuttons1" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" filter="raw" />
                 <field name="ebuttons2" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" filter="raw" />
                 <field name="ebuttons3" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" filter="raw" />
