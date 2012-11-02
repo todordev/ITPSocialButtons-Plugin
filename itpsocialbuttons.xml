@@ -220,25 +220,25 @@
                    <option value="1">JYES</option>
                 </field>
                 
-                <field name="spacer10" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_SETTINGS" />
+                <field name="spacer8" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_SETTINGS" />
                 <field name="zoo_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_DISPLAY_IN_ARTICLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_DISPLAY_IN_ARTICLE_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
                 
-                <field name="spacer11" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_SETTINGS" />
+                <field name="spacer9" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_SETTINGS" />
                 <field name="joomshopping_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_DISPLAY_IN_DETAILS_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
                 
-                <field name="spacer12" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_SETTINGS" />
+                <field name="spacer10" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_SETTINGS" />
                 <field name="hikashop_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_DISPLAY_IN_DETAILS_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
                 
-		        <field name="spacer9" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_SOCIALBUTTONS_SETTINGS" />
+		        <field name="spacer11" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_SOCIALBUTTONS_SETTINGS" />
                 <field name="loadCss" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE_DESC">
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
