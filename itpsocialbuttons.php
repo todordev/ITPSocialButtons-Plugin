@@ -892,6 +892,8 @@ class plgContentITPSocialButtons extends JPlugin {
         
         JLoader::register("MailToHelper", JPATH_SITE . '/components/com_mailto/helpers/mailto.php');
         
+        $link     = rawurldecode($link);
+        
 		$template = JFactory::getApplication()->getTemplate();
 		$url	  = 'index.php?option=com_mailto&tmpl=component&template='.$template.'&link='.MailToHelper::addLink($link);
 
