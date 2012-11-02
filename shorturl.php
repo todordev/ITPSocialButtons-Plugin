@@ -10,10 +10,10 @@
  * other free or open source software licenses.
  */
 
-// Check to ensure this file is included in Joomla!
+// no direct access
 defined('_JEXEC') or die;
 
-class ItpShortUrlSocialButtonsPlugin extends JObject{
+class ItpSocialButtonsPluginShortUrl extends JObject{
     
     private $url;
     private $shortUrl;
@@ -48,7 +48,7 @@ class ItpShortUrlSocialButtonsPlugin extends JObject{
         // Check for installed CURL library
         $installedLibraries = get_loaded_extensions();
         if(!in_array('curl', $installedLibraries)) {
-            $this->setError(JText::_("MOD_ITPSOCIALBUTTONS_CURL_MISSING"));
+            $this->setError(JText::_("ITP_ERROR_CURL_MISSING"));
             return null;
         }
         
@@ -109,7 +109,7 @@ class ItpShortUrlSocialButtonsPlugin extends JObject{
                 $this->shortUrl = $json->data->url;
             }
         } else {
-            $this->setError(JText::_("MOD_ITPSOCIALBUTTONS_UNKNOWN_ERROR"));
+            $this->setError(JText::_("ITP_ERROR_UNKNOWN_ERROR"));
         }
         
     }
@@ -143,7 +143,7 @@ class ItpShortUrlSocialButtonsPlugin extends JObject{
                 $this->shortUrl = $json->results->short_url;
             }
         } else {
-            $this->setError(JText::_("MOD_ITPSOCIALBUTTONS_UNKNOWN_ERROR"));
+            $this->setError(JText::_("ITP_ERROR_UNKNOWN_ERROR"));
         }
         
     }
@@ -186,7 +186,7 @@ class ItpShortUrlSocialButtonsPlugin extends JObject{
                 $this->shortUrl = $json->id;
             }
         } else {
-            $this->setError(JText::_("MOD_ITPSOCIALBUTTONS_UNKNOWN_ERROR"));
+            $this->setError(JText::_("ITP_ERROR_UNKNOWN_ERROR"));
         }
         
     }
