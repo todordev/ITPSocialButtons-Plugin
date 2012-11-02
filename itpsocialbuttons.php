@@ -823,7 +823,7 @@ class plgContentITPSocialButtons extends JPlugin {
             "apiKey"    => $params->get("apiKey"),
             "service"   => $params->get("shortUrlService"),
         );
-        
+
         $shortUrl  = new ItpSocialButtonsPluginShortUrl($link,$options);
         $shortLink = $shortUrl->getUrl();
         if(!$shortLink) {
@@ -835,6 +835,9 @@ class plgContentITPSocialButtons extends JPlugin {
             );
             
             JLog::add($shortUrl->getError(), JLog::ERROR);
+            
+            // Get original link
+            $shortLink = $link;
         } 
         
         return $shortLink;
