@@ -9,6 +9,7 @@ Changelog
 Version 2.1
 --------
 * Added options to explude K2 articles and categories
+* Improved short URL functionality
 
 Version 2.0
 --------
