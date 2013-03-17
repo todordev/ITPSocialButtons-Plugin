@@ -194,33 +194,14 @@
                     
 			</fieldset>
 			
-			<fieldset name="virtualmart_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIRTUEMART_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_VIRTUEMART_SETTINGS_DESC">
+			<fieldset name="virtuemart_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIRTUEMART_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_VIRTUEMART_SETTINGS_DESC">
 			    <field name="vmDisplayInDetails" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                
-                <field name="vm_exclude_articles" type="text" default="" size="80"
-                    label="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_ARTICLES"
-                    description="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_ARTICLES_DESC" />
-                        
-                <field name="vm_exclude_cats" type="text" default="" size="80"
-                    label="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_CATEGORIES"
-                    description="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_CATEGORIES_DESC" />
-                        
-                <field name="vm_include_articles" type="text" default="" size="80"
-                    label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ARITCLES"
-                    description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ARITCLES_DESC" />
                     
 			</fieldset>
 			
-			<fieldset name="jevents_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS_DESC">
-                 <field name="vmDisplayInDetails" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS_DESC" >
-                   <option value="0">JNO</option>
-                   <option value="1">JYES</option>
-                </field>
-            </fieldset>
-            
             <fieldset name="jevents_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS_DESC">
                  <field name="jeDisplayInEvents" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_JEVENT" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_JEVENT_DESC" >
                    <option value="0">JNO</option>
