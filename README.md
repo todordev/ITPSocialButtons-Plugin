@@ -1,10 +1,21 @@
 ITPSocialButtons Plugin for Joomla! 
 ==========================
-( Version 1.9 )
+( Version 2.1 )
 --------------------------
 
 Changelog
 ---------
+
+Version 2.1
+--------
+* Added options to explude K2 articles and categories
+* Improved short URL functionality
+
+Version 2.0
+--------
+* Now works with ZOO, JoomShopping, HikaShop, EasyBlog, MyBlog, VipPortfolio PRO
+* Added functionality to add "Share with friend" link. Now users can send a link to their friends by email.
+* Improved
 
 Version 1.9
 -------------
