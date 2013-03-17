@@ -6,6 +6,10 @@ ITPSocialButtons Plugin for Joomla!
 Changelog
 ---------
 
+Version 2.1
+--------
+* Added options to explude K2 articles and categories
+
 Version 2.0
 --------
 * Now works with ZOO, JoomShopping, HikaShop, EasyBlog, MyBlog, VipPortfolio PRO

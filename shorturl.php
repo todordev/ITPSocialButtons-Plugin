@@ -13,7 +13,7 @@
 // no direct access
 defined('_JEXEC') or die;
 
-class ItpSocialButtonsPluginShortUrl extends JObject{
+class ItpSocialButtonsPluginShortUrl{
     
     private $url;
     private $shortUrl;
@@ -48,8 +48,7 @@ class ItpSocialButtonsPluginShortUrl extends JObject{
         // Check for installed CURL library
         $installedLibraries = get_loaded_extensions();
         if(!in_array('curl', $installedLibraries)) {
-            $this->setError(JText::_("ITP_ERROR_CURL_MISSING"));
-            return null;
+            throw new Exception(JText::_("ITP_ERROR_CURL_MISSING"));
         }
         
         switch($this->service) {
@@ -104,12 +103,12 @@ class ItpSocialButtonsPluginShortUrl extends JObject{
             
             if($json->status_code != 200) {
                 $errorMessage = "[Bitly service] Message: " . $json->status_txt;
-                $this->setError($errorMessage);
+                throw new Exception($errorMessage);
             } else {
                 $this->shortUrl = $json->data->url;
             }
         } else {
-            $this->setError(JText::_("ITP_ERROR_UNKNOWN_ERROR"));
+            throw new Exception(JText::_("PLG_CONTENT_ITPSOCIALBUTTONS_ERROR_UNKNOWN_ERROR"));
         }
         
     }
@@ -138,20 +137,18 @@ class ItpSocialButtonsPluginShortUrl extends JObject{
             
             if(!empty($json->errorCode)) {
                 $errorMessage = "[TinyCC service] Message: " . $json->errorMessage;
-                $this->setError($errorMessage);
+                throw new Exception($errorMessage);
             } else {
                 $this->shortUrl = $json->results->short_url;
             }
         } else {
-            $this->setError(JText::_("ITP_ERROR_UNKNOWN_ERROR"));
+            throw new Exception(JText::_("PLG_CONTENT_ITPSOCIALBUTTONS_ERROR_UNKNOWN_ERROR"));
         }
         
     }
     
-    
     /**
      * Get a shor url from Goo.gl
-     * 
      */
     protected function getGoogleURL() {
         
@@ -181,12 +178,12 @@ class ItpSocialButtonsPluginShortUrl extends JObject{
             
             if(!empty($json->error)) {
                 $errorMessage = "[Goo.gl service] Message: " . $json->error->message ."; Location: " . $json->error->errors[0]->location;
-                $this->setError($errorMessage);
+                throw new Exception($errorMessage);
             } else {
                 $this->shortUrl = $json->id;
             }
         } else {
-            $this->setError(JText::_("ITP_ERROR_UNKNOWN_ERROR"));
+            throw new Exception(JText::_("PLG_CONTENT_ITPSOCIALBUTTONS_ERROR_UNKNOWN_ERROR"));
         }
         
     }

@@ -65,7 +65,7 @@ class plgContentITPSocialButtons extends JPlugin {
      * @return  string
      */
     public function onContentPrepare($context, &$article, &$params, $limitstart) {
-	
+        
     	if (!$article OR !isset($this->params)) { return; };            
         
         $app = JFactory::getApplication();
@@ -182,7 +182,7 @@ class plgContentITPSocialButtons extends JPlugin {
      */
     private function isContentRestricted(&$article, $context) {
         
-        // Check for currect context
+        // Check for correct context
         if(false === strpos($context, "com_content")) {
            return true;
         }
@@ -279,22 +279,40 @@ class plgContentITPSocialButtons extends JPlugin {
             return true;
         }
         
-        if(strcmp("item", $this->currentView) == 0) {
-            
-            // Fix the issue with media tab
-            $itemVideo = $params->get("itemVideo");
-            static $itemVideoExists = 1;
-            
-            if($itemVideo AND ($itemVideoExists == 1) ) {
-                $itemVideoExists -= 1;
+        $displayInArticles     = $this->params->get('k2DisplayInArticles', 0);
+        if(!$displayInArticles AND (strcmp("item", $this->currentView) == 0) ) {
+            return true;
+        }
+        
+        // Exclude articles
+        $excludeArticles = $this->params->get('k2_exclude_articles');
+        if(!empty($excludeArticles)){
+            $excludeArticles = explode(',', $excludeArticles);
+        }
+        settype($excludeArticles, 'array');
+        JArrayHelper::toInteger($excludeArticles);
+        
+        // Exluded categories
+        $excludedCats           = $this->params->get('k2_exclude_cats');
+        if(!empty($excludedCats)){
+            $excludedCats = explode(',', $excludedCats);
+        }
+        settype($excludedCats, 'array');
+        JArrayHelper::toInteger($excludedCats);
+        
+        // Included Articles
+        $includedArticles = $this->params->get('k2_include_articles');
+        if(!empty($includedArticles)){
+            $includedArticles = explode(',', $includedArticles);
+        }
+        settype($includedArticles, 'array');
+        JArrayHelper::toInteger($includedArticles);
+        
+        if(!in_array($article->id, $includedArticles)) {
+            // Check exluded articles
+            if(in_array($article->id, $excludeArticles) OR in_array($article->catid, $excludedCats)){
                 return true;
             }
-            
-            $displayInArticles     = $this->params->get('k2DisplayInArticles', 0);
-            if(!$displayInArticles){
-                return true;
-            }
-            
         }
         
         $this->prepareK2Object($article, $params);
@@ -357,7 +375,7 @@ class plgContentITPSocialButtons extends JPlugin {
      */
     private function isVirtuemartRestricted(&$article, $context) {
             
-        // Check for currect context
+        // Check for correct context
         if(strpos($context, "com_virtuemart") === false) {
            return true;
         }
@@ -385,7 +403,7 @@ class plgContentITPSocialButtons extends JPlugin {
      */
 	private function isMyBlogRestricted(&$article, $context) {
 
-        // Check for currect context
+        // Check for correct context
         if(strpos($context, "myblog") === false) {
            return true;
         }
@@ -411,7 +429,7 @@ class plgContentITPSocialButtons extends JPlugin {
      */
 	private function isVipPortfolioRestricted(&$article, $context) {
 
-        // Check for currect context
+        // Check for correct context
         if(strpos($context, "com_vipportfolio") === false) {
            return true;
         }
@@ -433,7 +451,7 @@ class plgContentITPSocialButtons extends JPlugin {
      */
 	private function isZooRestricted(&$article, $context) {
 	    
-        // Check for currect context
+        // Check for correct context
         if(false === strpos($context, "com_zoo")) {
            return true;
         }
@@ -469,7 +487,7 @@ class plgContentITPSocialButtons extends JPlugin {
      */
 	private function isEasyBlogRestricted(&$article, $context) {
         $allowedViews = array("categories", "entry", "latest", "tags");   
-        // Check for currect context
+        // Check for correct context
         if(strpos($context, "easyblog") === false) {
            return true;
         }
@@ -514,7 +532,7 @@ class plgContentITPSocialButtons extends JPlugin {
      */
 	private function isJoomShoppingRestricted(&$article, $context) {
         
-        // Check for currect context
+        // Check for correct context
         if(false === strpos($context, "com_content.article")) {
            return true;
         }
@@ -536,7 +554,7 @@ class plgContentITPSocialButtons extends JPlugin {
      */
 	private function isHikaShopRestricted(&$article, $context) {
 	    
-        // Check for currect context
+        // Check for correct context
         if(false === strpos($context, "text")) {
            return true;
         }
@@ -824,21 +842,26 @@ class plgContentITPSocialButtons extends JPlugin {
             "service"   => $params->get("shortUrlService"),
         );
 
-        $shortUrl  = new ItpSocialButtonsPluginShortUrl($link,$options);
-        $shortLink = $shortUrl->getUrl();
-        if(!$shortLink) {
-            // Add logger
-            JLog::addLogger(
-                array(
-                    'text_file' => 'error.php',
-                 )
-            );
+        try {
             
-            JLog::add($shortUrl->getError(), JLog::ERROR);
+            $shortUrl  = new ItpSocialButtonsPluginShortUrl($link,$options);
+            $shortLink = $shortUrl->getUrl();
             
             // Get original link
-            $shortLink = $link;
-        } 
+            if(!$shortLink) {
+                $shortLink = $link;
+            } 
+            
+        } catch(Exception $e) {
+            
+            JLog::add($e->getMessage(), JLog::DEBUG);
+            
+            // Get original link
+            if(!$shortLink) {
+                $shortLink = $link;
+            }
+                
+        }
         
         return $shortLink;
             

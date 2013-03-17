@@ -6,7 +6,7 @@
     <license>http://www.gnu.org/copyleft/gpl.html</license>
     <authorEmail>todor@itprism.com</authorEmail>
     <authorUrl>http://itprism.com</authorUrl>
-    <version>2.0</version>
+    <version>2.1</version>
     <creationDate>02 November, 2012</creationDate>
     <description>PLG_CONTENT_ITPSOCIALBUTTONS_DESC</description>
 	<languages folder="language">
@@ -140,10 +140,8 @@
                 <field name="ebuttons5" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" filter="raw" />
 			</fieldset>
 			
-			<fieldset name="advanced">
-			
-			    <field name="spacer1" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMLA_CONTENT" />
-                <field name="showInArticles" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_ARTICLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_ARTICLE_DESC" >
+			<fieldset name="joomla_content_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMLA_CONTENT" description="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMLA_CONTENT_DESC">
+			    <field name="showInArticles" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_ARTICLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_ARTICLE_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
@@ -166,11 +164,13 @@
                     description="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_CATEGORIES_DESC" />
                         
                 <field name="includeArticles" type="text" default="" size="80"
-	                label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ARITCLES"
-	                description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ARITCLES_DESC" />
-                
-                <field name="spacer2" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_K2_SETTINGS" />
-                <field name="k2DisplayInArticles" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_ARITCLES" description="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_ARITCLES_DESC" >
+                    label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ARITCLES"
+                    description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ARITCLES_DESC" />
+			</fieldset>
+			
+			<fieldset name="k2_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_K2_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_K2_SETTINGS_DESC">
+			
+			     <field name="k2DisplayInArticles" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_ARITCLES" description="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_ARITCLES_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
@@ -180,19 +180,55 @@
                    <option value="1">JYES</option>
                 </field>
                 
-                <field name="spacer3" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIRTUEMART_SETTINGS" />
-                <field name="vmDisplayInDetails" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS_DESC" >
+                <field name="k2_exclude_articles" type="text" default="" size="80"
+                    label="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_ARTICLES"
+                    description="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_ARTICLES_DESC" />
+                        
+                <field name="k2_exclude_cats" type="text" default="" size="80"
+                    label="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_CATEGORIES"
+                    description="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_CATEGORIES_DESC" />
+                        
+                <field name="k2_include_articles" type="text" default="" size="80"
+                    label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ARITCLES"
+                    description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ARITCLES_DESC" />
+                    
+			</fieldset>
+			
+			<fieldset name="virtualmart_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIRTUEMART_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_VIRTUEMART_SETTINGS_DESC">
+			    <field name="vmDisplayInDetails" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
                 
-                <field name="spacer4" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS" />
-                <field name="jeDisplayInEvents" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_JEVENT" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_JEVENT_DESC" >
+                <field name="vm_exclude_articles" type="text" default="" size="80"
+                    label="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_ARTICLES"
+                    description="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_ARTICLES_DESC" />
+                        
+                <field name="vm_exclude_cats" type="text" default="" size="80"
+                    label="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_CATEGORIES"
+                    description="PLG_CONTENT_ITPSOCIALBUTTONS_EXCLUDE_CATEGORIES_DESC" />
+                        
+                <field name="vm_include_articles" type="text" default="" size="80"
+                    label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ARITCLES"
+                    description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ARITCLES_DESC" />
+                    
+			</fieldset>
+			
+			<fieldset name="jevents_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS_DESC">
+                 <field name="vmDisplayInDetails" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                    
-                <field name="spacer5" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_EASYBLOG_SETTINGS" />
+            </fieldset>
+            
+            <fieldset name="jevents_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS_DESC">
+                 <field name="jeDisplayInEvents" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_JEVENT" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_JEVENT_DESC" >
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
+                </field>
+            </fieldset>
+            
+            <fieldset name="easyblog_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_EASYBLOG_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_EASYBLOG_SETTINGS_DESC">
                 <field name="ebDisplayInEntry" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ENTRY" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ENTRY_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
@@ -209,41 +245,48 @@
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                <field name="spacer6" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_MYBLOG_SETTINGS" />
+            </fieldset>
+            
+            <fieldset name="myblog_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_MYBLOG_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_MYBLOG_SETTINGS_DESC">
                 <field name="mbDisplay" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_POST" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_POST_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                <field name="spacer7" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIPPORTFOLIO_SETTINGS" />
+            </fieldset>
+            
+            <fieldset name="vipportfolio_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIPPORTFOLIO_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_VIPPORTFOLIO_SETTINGS_DESC">
                 <field name="vipportfolio_lineal" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LINEAL" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LINEAL_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                
-                <field name="spacer8" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_SETTINGS" />
+            </fieldset>
+            
+            <fieldset name="zoo_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_SETTINGS_DESC">
                 <field name="zoo_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_DISPLAY_IN_ARTICLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_DISPLAY_IN_ARTICLE_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                
-                <field name="spacer9" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_SETTINGS" />
+            </fieldset>
+            
+            <fieldset name="joomshopping_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_SETTINGS_DESC">
                 <field name="joomshopping_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_DISPLAY_IN_DETAILS_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                
-                <field name="spacer10" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_SETTINGS" />
+            </fieldset>
+            
+            <fieldset name="hikashop_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_SETTINGS_DESC">
                 <field name="hikashop_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_DISPLAY_IN_DETAILS_DESC" >
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                
-		        <field name="spacer11" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_SOCIALBUTTONS_SETTINGS" />
+            </fieldset>
+            
+			<fieldset name="advanced">
                 <field name="loadCss" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE_DESC">
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
                 </field>
-		        
             </fieldset>
              
         </fields>
