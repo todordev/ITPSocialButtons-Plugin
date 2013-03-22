@@ -345,6 +345,7 @@ class plgContentITPSocialButtons extends JPlugin {
     
     private function getContent(&$article){
         
+        $base = rawurlencode( $this->getUrl($article) );
         $url  = rawurlencode( $this->getUrl($article) );
         $title= rawurlencode( $this->getTitle($article) );
         
@@ -376,7 +377,7 @@ class plgContentITPSocialButtons extends JPlugin {
             $html .= $this->getGoogleButton($title, $url);
         }
         if($this->params->get("displaySumbleUpon")) {
-            $html .= $this->getStumbleuponButton($title, $url);
+            $html .= $this->getStumbleuponButton($title, $base);
         }
         if($this->params->get("displayTechnorati")) {
             $html .= $this->getTechnoratiButton($title, $url);            
