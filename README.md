@@ -1,10 +1,14 @@
 ITPSocialButtons Plugin for Joomla! 
 ==========================
-( Version 2.1 )
+( Version 2.1.1 )
 --------------------------
 
 Changelog
 ---------
+
+Version 2.1.1
+--------
+* Fixed StumbleUpon button
 
 Version 2.1
 --------
