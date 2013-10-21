@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="2.5" type="plugin" group="content" method="upgrade">
+<extension version="3.1" type="plugin" group="content" method="upgrade">
     <name>plg_content_itpsocialbuttons</name>
     <author>Todor Iliev</author>
     <copyright>Copyright (C) 2010 Todor Iliev ( ITPrism.com ). All rights reserved.</copyright>
     <license>http://www.gnu.org/copyleft/gpl.html</license>
     <authorEmail>todor@itprism.com</authorEmail>
     <authorUrl>http://itprism.com</authorUrl>
-    <version>2.1</version>
-    <creationDate>17 March, 2013</creationDate>
-    <description>PLG_CONTENT_ITPSOCIALBUTTONS_DESC</description>
+    <version>2.2</version>
+    <creationDate>21 October, 2013</creationDate>
+    <description><![CDATA[
+    <p><a href="http://itprism.com/free-joomla-extensions/social-marketing-seo/multi-share-buttons" target="_blank">ITPSocialButtons</a> is a plugin that adds social network buttons on your page.</p><p><a href='http://itprism.com/help/35-social-buttons-documentation-faq' target='_blank'>Read documentation</a> that will help you to setup the extensions.</p>
+    <p>Invest in the extension improvement and <a href="http://itprism.com/sponsorship" target="_blank">sponsor it via SMS, PayPal and Bitcoin</a>.</p>
+    <p><a href="http://itprism.com/" target="_blank">Subscribe for the newsletter</a> to receive information about updates and new ITPrism extensions.</p>
+    <p>Please, vote for the plugin on <a href="http://extensions.joomla.org/extensions/social-web/social-bookmarking/14094" target="_blank">Joomla! Extensions Directory</a></p>
+    ]]></description>
 	<languages folder="language">
 		<language tag="en-GB">en-GB/en-GB.plg_content_itpsocialbuttons.ini</language>
 		<language tag="en-GB">en-GB/en-GB.plg_content_itpsocialbuttons.sys.ini</language>
@@ -27,6 +32,13 @@
     <config>
 		<fields name="params">
 			<fieldset name="basic">
+            
+                <field name="trigger_place" type="list" default="on_content_prepare" label="PLG_CONTENT_ITPSOCIALBUTTONS_METHOD_GENERATIONG" description="PLG_CONTENT_ITPSOCIALBUTTONS_METHOD_GENERATIONG_DESC" >
+                   <option value="on_content_prepare">onContentPrepare</option>
+                   <option value="on_content_before_display">onContentBeforeDisplay</option>
+                   <option value="on_content_after_display">onContentAfterDisplay</option>
+                </field>
+                
 			    <field name="position" type="list" default="2" label="PLG_CONTENT_ITPSOCIALBUTTONS_POSITION" description="PLG_CONTENT_ITPSOCIALBUTTONS_POSITION_DESC" >
                    <option value="1">PLG_CONTENT_ITPSOCIALBUTTONS_TOP</option>
                    <option value="2">PLG_CONTENT_ITPSOCIALBUTTONS_BOTTON</option>
@@ -66,7 +78,7 @@
 		           <option value="socialshift64">Social Shift 64x64px</option>
 				</field>
 
-				<field name="showTitle" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TITLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TITLE_DESC" >
+				<field name="showTitle" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TITLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TITLE_DESC" class="btn-group">
 				   <option value="0">JNO</option>
                    <option value="1">JYES</option>
 				</field>
@@ -85,35 +97,35 @@
                    <option value="itp-sb-center">PLG_CONTENT_ITPSOCIALBUTTONS_CENTER</option>
 				</field>
 				
-				<field name="displayDelicious" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_DELICIOUS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_DELICIOUS_DESC" >
+				<field name="displayDelicious" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_DELICIOUS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_DELICIOUS_DESC" class="btn-group">
 				   <option value="0">JNO</option>
 		           <option value="1">JYES</option>
 		        </field>
-		        <field name="displayDigg" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_DIGG" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_DIGG_DESC" >
+		        <field name="displayDigg" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_DIGG" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_DIGG_DESC" class="btn-group">
 		           <option value="0">JNO</option>
                    <option value="1">JYES</option>
 		        </field>
-		        <field name="displayFacebook" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_FACEBOOK" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_FACEBOOK_DESC" >
+		        <field name="displayFacebook" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_FACEBOOK" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_FACEBOOK_DESC" class="btn-group">
 		           <option value="0">JNO</option>
                    <option value="1">JYES</option>
 		        </field>
-		        <field name="displayGoogle" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_GOOGLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_GOOGLE_DESC" >
+		        <field name="displayGoogle" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_GOOGLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_GOOGLE_DESC" class="btn-group">
 		           <option value="0">JNO</option>
                    <option value="1">JYES</option>
 		        </field>
-		        <field name="displayLinkedIn" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_LINKEDIN" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_LINKEDIN_DESC" >
+		        <field name="displayLinkedIn" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_LINKEDIN" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_LINKEDIN_DESC" class="btn-group">
 		           <option value="0">JNO</option>
                    <option value="1">JYES</option>
 		        </field>
-		        <field name="displaySumbleUpon" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_SUMBLEUPON" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_SUMBLEUPON_DESC" >
+		        <field name="displaySumbleUpon" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_SUMBLEUPON" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_SUMBLEUPON_DESC" class="btn-group">
 		           <option value="0">JNO</option>
                    <option value="1">JYES</option>
 		        </field>
-		        <field name="displayTechnorati" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TECHNORATI" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TECHNORATI_DESC" >
+		        <field name="displayTechnorati" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TECHNORATI" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TECHNORATI_DESC" class="btn-group">
 		           <option value="0">JNO</option>
                    <option value="1">JYES</option>
 		        </field>
-		        <field name="displayTwitter" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TWITTER" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TWITTER_DESC" >
+		        <field name="displayTwitter" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TWITTER" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_TWITTER_DESC" class="btn-group">
 		           <option value="0">JNO</option>
                    <option value="1">JYES</option>
 		        </field>
@@ -121,7 +133,7 @@
 			
 			<fieldset name="shortener_url" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHORTENER_SETTINGS">
                 <field name="login" type="text" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_LOGIN" description="PLG_CONTENT_ITPSOCIALBUTTONS_LOGIN_DESC"/>
-                <field name="apiKey" type="text" default="" size="80" label="PLG_CONTENT_ITPSOCIALBUTTONS_API_KEY" description="PLG_CONTENT_ITPSOCIALBUTTONS_API_KEY_DESC"/>
+                <field name="apiKey" type="text" default="" size="80" class="span3" label="PLG_CONTENT_ITPSOCIALBUTTONS_API_KEY" description="PLG_CONTENT_ITPSOCIALBUTTONS_API_KEY_DESC"/>
                 <field name="shortUrlService" type="list" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHORTENER_SERVICE" description="PLG_CONTENT_ITPSOCIALBUTTONS_SHORTENER_SERVICE_DESC" >
                    <option value="">PLG_CONTENT_ITPSOCIALBUTTONS_NONE</option>
                    <option value="google">goo.gl</option>
@@ -133,24 +145,24 @@
 			</fieldset>
 			
 			<fieldset name="additional_buttons_code" label="PLG_CONTENT_ITPSOCIALBUTTONS_ADDITIONAL_BUTTONS">
-                <field name="ebuttons1" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" filter="raw" />
-                <field name="ebuttons2" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" filter="raw" />
-                <field name="ebuttons3" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" filter="raw" />
-                <field name="ebuttons4" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" filter="raw" />
-                <field name="ebuttons5" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" filter="raw" />
+                <field name="ebuttons1" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" class="span6" filter="raw" />
+                <field name="ebuttons2" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" class="span6" filter="raw" />
+                <field name="ebuttons3" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" class="span6" filter="raw" />
+                <field name="ebuttons4" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" class="span6" filter="raw" />
+                <field name="ebuttons5" type="textarea" default="" label="PLG_CONTENT_ITPSOCIALBUTTONS_CUSTOM_CODE" description="PLG_CONTENT_ITPSOCIALBUTTONS_EXTRA_DESC" cols="50" rows="10" class="span6" filter="raw" />
 			</fieldset>
 			
 			<fieldset name="joomla_content_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMLA_CONTENT" description="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMLA_CONTENT_DESC">
-			    <field name="showInArticles" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_ARTICLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_ARTICLE_DESC" >
+			    <field name="showInArticles" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_ARTICLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_ARTICLE_DESC" class="btn-group">
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                <field name="showInCategories" type="radio" default="0" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_CATEGORIES" description="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_CATEGORIES_DESC" >
+                <field name="showInCategories" type="radio" default="0" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_CATEGORIES" description="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_CATEGORIES_DESC" class="btn-group">
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
                 
-                <field name="showInFeatured" type="radio" default="0" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_FEATURE" description="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_FEATURE_DESC" >
+                <field name="showInFeatured" type="radio" default="0" label="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_FEATURE" description="PLG_CONTENT_ITPSOCIALBUTTONS_SHOW_IN_FEATURE_DESC" class="btn-group">
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
@@ -170,12 +182,12 @@
 			
 			<fieldset name="k2_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_K2_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_K2_SETTINGS_DESC">
 			
-			     <field name="k2DisplayInArticles" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_ARITCLES" description="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_ARITCLES_DESC" >
+			     <field name="k2DisplayInArticles" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_ARITCLES" description="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_ARITCLES_DESC" class="btn-group">
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
                 
-                <field name="k2DisplayInItemlist" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_CATEGORIES" description="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_CATEGORIES_DESC" >
+                <field name="k2DisplayInItemlist" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_CATEGORIES" description="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_CATEGORIES_DESC" class="btn-group">
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
@@ -194,77 +206,82 @@
                     
 			</fieldset>
 			
-			<fieldset name="virtuemart_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIRTUEMART_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_VIRTUEMART_SETTINGS_DESC">
-			    <field name="vmDisplayInDetails" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS_DESC" >
-                   <option value="0">JNO</option>
-                   <option value="1">JYES</option>
-                </field>
-                    
-			</fieldset>
-			
-            <fieldset name="jevents_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS_DESC">
-                 <field name="jeDisplayInEvents" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_JEVENT" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_JEVENT_DESC" >
-                   <option value="0">JNO</option>
-                   <option value="1">JYES</option>
-                </field>
-            </fieldset>
-            
             <fieldset name="easyblog_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_EASYBLOG_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_EASYBLOG_SETTINGS_DESC">
-                <field name="ebDisplayInEntry" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ENTRY" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ENTRY_DESC" >
+                <field name="ebDisplayInEntry" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ENTRY" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_ENTRY_DESC" class="btn-group">
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                <field name="ebDisplayInCategories" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_CATEGORIES" description="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_CATEGORIES_DESC" >
+                <field name="ebDisplayInCategories" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_CATEGORIES" description="PLG_CONTENT_ITPSOCIALBUTTONS_K2_DISPLAY_IN_CATEGORIES_DESC" class="btn-group">
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                <field name="ebDisplayInTags" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_TAGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_TAGS_DESC" >
+                <field name="ebDisplayInTags" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_TAGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_TAGS_DESC" class="btn-group">
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-                <field name="ebDisplayInLatest" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LATEST" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LATEST_DESC" >
-                   <option value="0">JNO</option>
-                   <option value="1">JYES</option>
-                </field>
-            </fieldset>
-            
-            <fieldset name="myblog_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_MYBLOG_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_MYBLOG_SETTINGS_DESC">
-                <field name="mbDisplay" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_POST" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_POST_DESC" >
+                <field name="ebDisplayInLatest" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LATEST" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LATEST_DESC" class="btn-group">
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
             </fieldset>
             
-            <fieldset name="vipportfolio_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIPPORTFOLIO_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_VIPPORTFOLIO_SETTINGS_DESC">
-                <field name="vipportfolio_lineal" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LINEAL" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LINEAL_DESC" >
+            <fieldset name="vipquotes_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIPQUOTES_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_VIPQUOTES_SETTINGS_DESC">
+                <field name="vipquotes_display_quote" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIPQUOTES_DISPLAY_ON_QUOTE" description="PLG_CONTENT_ITPSOCIALBUTTONS_VIPQUOTES_DISPLAY_ON_QUOTE_DESC" class="btn-group">
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
-            </fieldset>
-            
-            <fieldset name="zoo_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_SETTINGS_DESC">
-                <field name="zoo_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_DISPLAY_IN_ARTICLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_DISPLAY_IN_ARTICLE_DESC" >
-                   <option value="0">JNO</option>
-                   <option value="1">JYES</option>
-                </field>
-            </fieldset>
-            
-            <fieldset name="joomshopping_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_SETTINGS_DESC">
-                <field name="joomshopping_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_DISPLAY_IN_DETAILS_DESC" >
-                   <option value="0">JNO</option>
-                   <option value="1">JYES</option>
-                </field>
-            </fieldset>
-            
-            <fieldset name="hikashop_advanced" label="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_SETTINGS" description="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_SETTINGS_DESC">
-                <field name="hikashop_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_DISPLAY_IN_DETAILS_DESC" >
+                <field name="vipquotes_display_author" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIPQUOTES_DISPLAY_ON_AUTHOR" description="PLG_CONTENT_ITPSOCIALBUTTONS_VIPQUOTES_DISPLAY_ON_AUTHOR_DESC" class="btn-group">
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
             </fieldset>
             
 			<fieldset name="advanced">
-                <field name="loadCss" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE_DESC">
+			    
+			    <field name="spacer1" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIRTUEMART_SETTINGS" />
+			    <field name="vmDisplayInDetails" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS_DESC" class="btn-group">
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
+                </field>
+                
+			    <field name="spacer2" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_JEVENTS_SETTINGS" />
+			    <field name="jeDisplayInEvents" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_JEVENT" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_JEVENT_DESC" class="btn-group">
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
+                </field>
+                
+			    <field name="spacer3" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_MYBLOG_SETTINGS" />
+			    <field name="mbDisplay" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_POST" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_POST_DESC" class="btn-group">
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
+                </field>
+                
+			    <field name="spacer4" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIPPORTFOLIO_SETTINGS" />
+			    <field name="vipportfolio_lineal" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LINEAL" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LINEAL_DESC" class="btn-group">
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
+                </field>
+                
+			    <field name="spacer5" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_SETTINGS" />
+			    <field name="zoo_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_DISPLAY_IN_ARTICLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_ZOO_DISPLAY_IN_ARTICLE_DESC" class="btn-group">
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
+                </field>
+                
+			    <field name="spacer6" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_SETTINGS" />
+			    <field name="joomshopping_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_JOOMSHOPPING_DISPLAY_IN_DETAILS_DESC" class="btn-group">
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
+                </field>
+                
+			    <field name="spacer7" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_SETTINGS" />
+			    <field name="hikashop_display" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_HIKASHOP_DISPLAY_IN_DETAILS_DESC" class="btn-group">
+                   <option value="0">JNO</option>
+                   <option value="1">JYES</option>
+                </field>
+                
+                <field name="spacer8" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_ITPSOCIALBUTTONS_SETTINGS" />
+                <field name="loadCss" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE_DESC" class="btn-group">
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
                 </field>

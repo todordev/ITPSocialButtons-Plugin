@@ -30,8 +30,8 @@ class ItpSocialButtonsPluginShortUrl{
     }
     
     private function bindOptions($options) {
-        if(isset($options['apiKey'])) {
-            $this->apiKey = $options['apiKey'];
+        if(isset($options['api_key'])) {
+            $this->apiKey = $options['api_key'];
         }
         
         if(isset($options['service'])) {

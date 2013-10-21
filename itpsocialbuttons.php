@@ -28,51 +28,123 @@ class plgContentITPSocialButtons extends JPlugin {
 	private $currentView    = "";
     private $currentTask    = "";
     private $currentOption  = "";
+    private $currentLayout  = "";
 	
-	/**
-     * Constructor
+    /**
+     * Prepare the content 
+     * There are three positions where the icons can be added - on the top, on the bottom and on both.
      *
-     * @param object $subject The object to observe
-     * @param array  $config  An optional associative array of configuration settings.
-     * Recognized key values include 'name', 'group', 'params', 'language'
-     * (this list is not meant to be comprehensive).
+     * @param   string	 The context of the content being passed to the plugin.
+	 * @param   object	 The article object.
+	 * @param   object	 The article params
+	 * @param   integer  The 'page'  number
+     * 
+     * @return  void
      */
-    public function __construct(&$subject, $config = array()) {
-        parent::__construct($subject, $config);
+    public function onContentPrepare($context, &$article, &$params, $page = 0) {
         
-        $app =& JFactory::getApplication();
-        /** @var $app JSite **/
-
-        if($app->isAdmin()) {
+        if (!$article OR !isset($this->params)) { return; }
+        
+        // Check for correct trigger
+        if(strcmp("on_content_prepare", $this->params->get("trigger_place")) != 0) {
             return;
         }
-      
-       $this->plgUrlPath 	 =  JURI::root() . "plugins/content/itpsocialbuttons/";
-       $this->currentView    =  $app->input->get->getCmd("view");
-       $this->currentTask    =  $app->input->get->getCmd("task");
-       $this->currentOption  =  $app->input->get->getCmd("option");
+        
+        // Generate content
+        $content = $this->processGenerating($context, $article, $params, $page = 0);
+        
+        // If there is no result, return void.
+        if(is_null($content)) { return; }
+        
+        $position = $this->params->get('position');
+        
+        switch($position){
+            
+            case 1: // Top
+                $article->text = $content . $article->text;
+                break;
+                
+            case 2: // Bottom
+                $article->text = $article->text . $content;
+                break;
+                
+            default: // Both
+                $article->text = $content . $article->text . $content;
+                break;
+                
+        }
+        
     }
     
     /**
-     * Prepare the content 
-     * There are three places where adds the icons - on the topo, n the bottom and on the both.
+     * Add social buttons into the article before content.
      *
-     * Method is called by the view and the results are imploded and displayed in a placeholder
-     *
-     * @param   object      The article object.  Note $article->text is also available
-     * @param   object      The article params
-     * @param   int         The 'page' number
-     * @return  string
+     * @param	string	The context of the content being passed to the plugin.
+     * @param	object	The article object.  Note $article->text is also available
+     * @param	object	The article params
+     * @param	int		The 'page' number
+     * 
+     * @return string
      */
-    public function onContentPrepare($context, &$article, &$params, $limitstart) {
+    public function onContentBeforeDisplay($context, &$article, &$params, $page = 0) {
+    
+        // Check for correct trigger
+        if(strcmp("on_content_before_display", $this->params->get("trigger_place")) != 0) {
+            return "";
+        }
+    
+        // Generate content
+        $content = $this->processGenerating($context, $article, $params, $page = 0);
         
-    	if (!$article OR !isset($this->params)) { return; };            
+        // If there is no result, return empty string.
+        if(is_null($content)) { return ""; }
         
+        return $content;
+    }
+    
+    /**
+     * Add social buttons into the article after content.
+     *
+     * @param	string	The context of the content being passed to the plugin.
+     * @param	object	The article object.  Note $article->text is also available
+     * @param	object	The article params
+     * @param	int		The 'page' number
+     * 
+     * @return string
+     */
+    public function onContentAfterDisplay($context, &$article, &$params, $page = 0) {
+    
+        // Check for correct trigger
+        if(strcmp("on_content_after_display", $this->params->get("trigger_place")) != 0) {
+            return "";
+        }
+    
+        // Generate content
+        $content = $this->processGenerating($context, $article, $params, $page = 0);
+        
+        // If there is no result, return empty string.
+        if(is_null($content)) { return ""; }
+        
+        return $content;
+    }
+    
+    /**
+     * Execute the process of buttons generating.
+     *
+     * @param string    $context
+     * @param object    $article
+     * @param JRegistry $params
+     * @param number    $page
+     * 
+     * @return NULL|string
+     */
+    private function processGenerating($context, &$article, &$params, $page = 0) {
+    
         $app = JFactory::getApplication();
         /** @var $app JSite **/
 
         if($app->isAdmin()) {
-            return;
+            return null;
         }
         
         $doc     = JFactory::getDocument();
@@ -81,11 +153,19 @@ class plgContentITPSocialButtons extends JPlugin {
         // Check document type
         $docType = $doc->getType();
         if(strcmp("html", $docType) != 0){
-            return;
+            return null;
         }
        
+        $this->plgUrlPath 	  =  JURI::root() . "plugins/content/itpsocialbuttons/";
+        
+        // Get request data
+        $this->currentOption  =  $app->input->getCmd("option");
+        $this->currentView    =  $app->input->getCmd("view");
+        $this->currentTask    =  $app->input->getCmd("task");
+        $this->currentLayout  = $app->input->getCmd("layout");
+        
         if($this->isRestricted($article, $context, $params)) {
-        	return;
+        	return null;
         }
         
         if($this->params->get("loadCss")) {
@@ -94,24 +174,10 @@ class plgContentITPSocialButtons extends JPlugin {
         
         // Load language file
         $this->loadLanguage();
-        
-        // Generate content
-        $content = $this->getContent($article, $context);
-        $position = $this->params->get('position');
-        
-        switch($position){
-            case 1:
-                $article->text = $content . $article->text;
-                break;
-            case 2:
-                $article->text = $article->text . $content;
-                break;
-            default:
-                $article->text = $content . $article->text . $content;
-                break;
-        }
-        
-        return;
+    
+        // Generate and return content
+        return $this->getContent($article, $context);
+    
     }
     
     private function isRestricted($article, $context, $params) {
@@ -165,6 +231,10 @@ class plgContentITPSocialButtons extends JPlugin {
                 $result = $this->isHikaShopRestricted($article, $context);
                 break; 
                 
+            case "com_vipquotes":
+                $result = $this->isVipQuotesRestricted($article, $context);
+                break;
+                
             default:
                 $result = true;
                 break;   
@@ -204,23 +274,6 @@ class plgContentITPSocialButtons extends JPlugin {
         $showInFeatured   = $this->params->get('showInFeatured');
         if(!$showInFeatured AND (strcmp("featured", $this->currentView) == 0)){
             return true;
-        }
-        
-        if(
-            ($showInCategories AND ($this->currentView == "category") )
-        OR 
-            ($showInFeatured AND ($this->currentView == "featured") )
-            ) {
-            $articleData        = $this->getArticle($article);
-            $article->id        = JArrayHelper::getValue($articleData,'id');
-            $article->catid     = JArrayHelper::getValue($articleData,'catid');
-            $article->title     = JArrayHelper::getValue($articleData,'title');
-            $article->slug      = JArrayHelper::getValue($articleData, 'slug');
-            $article->catslug   = JArrayHelper::getValue($articleData,'catslug');
-        }
-        
-        if(empty($article->id)) {
-            return true;            
         }
         
         // Exclude articles
@@ -368,8 +421,41 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
     /**
+     * Do verification for Vip Quotes extension. Is it restricted?
+     *
+     * @param ojbect $article
+     * @param string $context
+     */
+    private function isVipQuotesRestricted(&$article, $context) {
+    
+        // Check for correct context
+        if(strpos($context, "com_vipquotes") === false) {
+            return true;
+        }
+    
+        // Display only in view 'quote'
+        $allowedViews = array("author", "quote");
+        if(!in_array($this->currentView, $allowedViews)) {
+            return true;
+        }
+    
+        $displayOnViewQuote     = $this->params->get('vipquotes_display_quote', 0);
+        if(!$displayOnViewQuote){
+            return true;
+        }
+    
+        $displayOnViewAuthor     = $this->params->get('vipquotes_display_author', 0);
+        if(!$displayOnViewAuthor){
+            return true;
+        }
+    
+        return false;
+    }
+    
+    /**
      * 
-     * This method does verification for VirtueMart restrictions
+     * This method does verification for VirtueMart restrictions.
+     * 
      * @param stdClass $article
      * @param string $context
      */
@@ -385,7 +471,7 @@ class plgContentITPSocialButtons extends JPlugin {
             return true;
         }
         
-        // Check product details
+        // Only display content in the view "productdetails"
         $displayInDetails     = $this->params->get('vmDisplayInDetails', 0);
         if(!$displayInDetails){
             return true;
@@ -396,8 +482,8 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
 	/**
+     * It's a method that verify restriction for the component "com_myblog".
      * 
-     * It's a method that verify restriction for the component "com_myblog"
      * @param object $article
      * @param string $context
      */
@@ -444,8 +530,8 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
 	/**
+     * It's a method that verify restriction for the component "com_zoo".
      * 
-     * It's a method that verify restriction for the component "com_zoo"
      * @param object $article
      * @param string $context
      */
@@ -480,12 +566,14 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
 	/**
+     * It's a method that verify restriction for the component "com_easyblog".
      * 
-     * It's a method that verify restriction for the component "com_easyblog"
      * @param object $article
      * @param string $context
      */
 	private function isEasyBlogRestricted(&$article, $context) {
+	    
+	    
         $allowedViews = array("categories", "entry", "latest", "tags");   
         // Check for correct context
         if(strpos($context, "easyblog") === false) {
@@ -608,6 +696,7 @@ class plgContentITPSocialButtons extends JPlugin {
                 if (is_a($article, "jIcalEventRepeat")) { 
                     $uri = $this->getCurrentURI($url);
                 };
+                
                 break;
 
             case "com_easyblog":
@@ -627,7 +716,11 @@ class plgContentITPSocialButtons extends JPlugin {
                 break;
 
             case "com_hikashop":
-                $uri = $this->getCurrentURI($url);
+                $uri = $article->link;
+                break;
+                
+            case "com_vipquotes":
+                $uri = $article->link;
                 break;
                 
             default:
@@ -714,9 +807,11 @@ class plgContentITPSocialButtons extends JPlugin {
                 break;
 
             case "com_hikashop":
-                $doc      = JFactory::getDocument();
-                /**  @var $doc JDocumentHtml **/
-                $title    =  $doc->getTitle();
+                $title = $article->title;
+                break;
+                
+            case "com_vipquotes":
+                $title = $article->title;
                 break;
                 
             default:
@@ -728,45 +823,6 @@ class plgContentITPSocialButtons extends JPlugin {
         
     }
     
-	/**
-     * 
-     * Load an information about article, if missing, on the view 'category' and 'featured'
-     * @param object $article
-     */
-    private function getArticle(&$article) {
-        
-        $db = JFactory::getDbo();
-        /** @var $db JDatabaseMySQLi **/
-        
-        $query = "
-            SELECT 
-                `#__content`.`id`,
-                `#__content`.`catid`,
-                `#__content`.`alias`,
-                `#__content`.`title`,
-                `#__categories`.`alias` as category_alias
-            FROM
-                `#__content`
-            INNER JOIN
-                `#__categories`
-            ON
-                `#__content`.`catid`=`#__categories`.`id`
-            WHERE
-                `#__content`.`introtext` SOUNDS LIKE " . $db->quote($article->text); 
-        
-        $db->setQuery($query);
-        $result = $db->loadAssoc();
-        
-        if(!empty($result)) {
-            $result['slug']     = $result['alias'] ? $result['id'].':'.$result['alias'] : $result['id'];
-            $result['catslug']  = $result['category_alias'] ? $result['catid'].':'.$result['category_alias'] : $result['catid'];
-        } else {
-            $result = array();
-        }
-        
-        return $result;
-    }
-    
     /**
      * 
      * Generate the HTML code with buttons
@@ -774,12 +830,12 @@ class plgContentITPSocialButtons extends JPlugin {
      */
     private function getContent(&$article, $context){
         
-        $url    = rawurlencode( $this->getUrl($article, $context) );
+        $url    = $base = rawurlencode( $this->getUrl($article, $context) );
         $title  = rawurlencode( $this->getTitle($article, $context) );
         
         // Convert the url to short one
         if($this->params->get("shortUrlService")) {
-            $url = $this->getShortUrl($url, $this->params);
+            $url = $this->getShortUrl($url);
         }
         
         $html 	= '<div class="itp-social-buttons-box">';
@@ -805,7 +861,7 @@ class plgContentITPSocialButtons extends JPlugin {
             $html .= $this->getGoogleButton($title, $url);
         }
         if($this->params->get("displaySumbleUpon")) {
-            $html .= $this->getStumbleuponButton($title, $url);
+            $html .= $this->getStumbleuponButton($title, $base);
         }
         if($this->params->get("displayTechnorati")) {
             $html .= $this->getTechnoratiButton($title, $url);            
@@ -832,19 +888,20 @@ class plgContentITPSocialButtons extends JPlugin {
      * @param array $params
      * @return string
      */
-    private function getShortUrl($link, $params){
+    private function getShortUrl($link){
         
         JLoader::register("ItpSocialButtonsPluginShortUrl", dirname(__FILE__).DIRECTORY_SEPARATOR."shorturl.php");
         
         $options = array(
-            "login"     => $params->get("login"),
-            "apiKey"    => $params->get("apiKey"),
-            "service"   => $params->get("shortUrlService"),
+            "login"     => $this->params->get("login"),
+            "api_key"   => $this->params->get("apiKey"),
+            "service"   => $this->params->get("shortUrlService"),
         );
 
+        $shortLink = "";
         try {
             
-            $shortUrl  = new ItpSocialButtonsPluginShortUrl($link,$options);
+            $shortUrl  = new ItpSocialButtonsPluginShortUrl($link, $options);
             $shortLink = $shortUrl->getUrl();
             
             // Get original link
@@ -854,7 +911,7 @@ class plgContentITPSocialButtons extends JPlugin {
             
         } catch(Exception $e) {
             
-            JLog::add($e->getMessage(), JLog::DEBUG);
+            JLog::add($e->getMessage());
             
             // Get original link
             if(!$shortLink) {
@@ -958,7 +1015,7 @@ class plgContentITPSocialButtons extends JPlugin {
         
         $img_url = $this->plgUrlPath . "images/" . $this->params->get('icons_package') . "/google.png";
         
-        return '<a href="http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=' . $link . '" title="' . JText::sprintf("PLG_CONTENT_ITPSOCIALBUTTONS_SUBMIT", "Google Bookmarks") . '" target="blank" ><img src="' . $img_url . '" alt="' . JText::sprintf("PLG_CONTENT_ITPSOCIALBUTTONS_SUBMIT", "Google Bookmarks") . '" /></a>';
+        return '<a href="https://plus.google.com/share?url=' . $link . '" title="' . JText::sprintf("PLG_CONTENT_ITPSOCIALBUTTONS_SUBMIT", "Google Plus") . '" target="blank" ><img src="' . $img_url . '" alt="' . JText::sprintf("PLG_CONTENT_ITPSOCIALBUTTONS_SUBMIT", "Google Plus") . '" /></a>';
     }
     
     private function getStumbleuponButton($title, $link){
