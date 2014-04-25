@@ -3,7 +3,7 @@
  * @package      ITPSocialButtons
  * @subpackage   Plugins
  * @author       Todor Iliev
- * @copyright    Copyright (C) 2013 Todor Iliev <todor@itprism.com>. All rights reserved.
+ * @copyright    Copyright (C) 2014 Todor Iliev <todor@itprism.com>. All rights reserved.
  * @license      http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
 
@@ -25,21 +25,23 @@ class plgContentITPSocialButtons extends JPlugin {
     private $currentTask    = "";
     private $currentOption  = "";
     private $currentLayout  = "";
+
+    private $cache = array();
 	
     /**
-     * Prepare the content 
+     * Prepare the content.
      * There are three positions where the icons can be added - on the top, on the bottom and on both.
      *
-     * @param   string	 The context of the content being passed to the plugin.
-	 * @param   object	 The article object.
-	 * @param   object	 The article params
-	 * @param   integer  The 'page'  number
+     * @param   string	    $context The context of the content being passed to the plugin.
+	 * @param   object	    $article The article object.
+	 * @param   JRegistry	$params The article params
+	 * @param   integer     $page The 'page'  number
      * 
      * @return  void
      */
     public function onContentPrepare($context, &$article, &$params, $page = 0) {
-        
-        if (!$article OR !isset($this->params)) { return; }
+
+        if (!$article OR !isset($this->params) OR empty($article->text)) { return; }
         
         // Check for correct trigger
         if(strcmp("on_content_prepare", $this->params->get("trigger_place")) != 0) {
@@ -75,10 +77,10 @@ class plgContentITPSocialButtons extends JPlugin {
     /**
      * Add social buttons into the article before content.
      *
-     * @param	string	The context of the content being passed to the plugin.
-     * @param	object	The article object.  Note $article->text is also available
-     * @param	object	The article params
-     * @param	int		The 'page' number
+     * @param	string	    $context The context of the content being passed to the plugin.
+     * @param	object	    $article The article object.  Note $article->text is also available
+     * @param	JRegistry	$params The article params
+     * @param	int		    $page The 'page' number
      * 
      * @return string
      */
@@ -101,10 +103,10 @@ class plgContentITPSocialButtons extends JPlugin {
     /**
      * Add social buttons into the article after content.
      *
-     * @param	string	The context of the content being passed to the plugin.
-     * @param	object	The article object.  Note $article->text is also available
-     * @param	object	The article params
-     * @param	int		The 'page' number
+     * @param	string	    $context The context of the content being passed to the plugin.
+     * @param	object	    $article The article object.  Note $article->text is also available
+     * @param	JRegistry	$params The article params
+     * @param	int		    $page The 'page' number
      * 
      * @return string
      */
@@ -130,14 +132,14 @@ class plgContentITPSocialButtons extends JPlugin {
      * @param string    $context
      * @param object    $article
      * @param JRegistry $params
-     * @param number    $page
+     * @param int       $page
      * 
      * @return NULL|string
      */
     private function processGenerating($context, &$article, &$params, $page = 0) {
     
         $app = JFactory::getApplication();
-        /** @var $app JSite **/
+        /** @var $app JApplicationSite **/
 
         if($app->isAdmin()) {
             return null;
@@ -172,35 +174,24 @@ class plgContentITPSocialButtons extends JPlugin {
         $this->loadLanguage();
     
         // Generate and return content
-        return $this->getContent($article, $context);
+        return $this->getContent($article);
     
     }
     
     private function isRestricted($article, $context, $params) {
     	
-    	$result = false;
-    	
     	switch($this->currentOption) {
+
             case "com_content":
-            	
-            	// It's an implementation of "com_myblog"
-            	// I don't know why but $option contains "com_content" for a value
-            	// I hope it will be fixed in the future versions of "com_myblog"
-            	if(strcmp($context, "com_myblog") != 0) {
-                    $result = $this->isContentRestricted($article, $context);
-	                break;
-            	} 
-	                
-            case "com_myblog":
-                $result = $this->isMyBlogRestricted($article, $context);
+                $result = $this->isContentRestricted($article, $context);
                 break;
-                    
+
             case "com_k2":
                 $result = $this->isK2Restricted($article, $context, $params);
                 break;
                 
             case "com_virtuemart":
-                $result = $this->isVirtuemartRestricted($article, $context);
+                $result = $this->isVirtuemartRestricted($context);
                 break;
 
             case "com_jevents":
@@ -208,15 +199,15 @@ class plgContentITPSocialButtons extends JPlugin {
                 break;
 
             case "com_easyblog":
-                $result = $this->isEasyBlogRestricted($article, $context);
+                $result = $this->isEasyBlogRestricted($context);
                 break;
 
             case "com_vipportfolio":
-                $result = $this->isVipPortfolioRestricted($article, $context);
+                $result = $this->isVipPortfolioRestricted($context);
                 break;
                 
             case "com_zoo":
-                $result = $this->isZooRestricted($article, $context);
+                $result = $this->isZooRestricted($context);
                 break;    
                 
              case "com_jshopping":
@@ -224,13 +215,17 @@ class plgContentITPSocialButtons extends JPlugin {
                 break;  
 
             case "com_hikashop":
-                $result = $this->isHikaShopRestricted($article, $context);
+                $result = $this->isHikaShopRestricted($context);
                 break; 
                 
             case "com_vipquotes":
-                $result = $this->isVipQuotesRestricted($article, $context);
+                $result = $this->isVipQuotesRestricted($context);
                 break;
-                
+
+            case "com_userideas":
+                $result = $this->isUserIdeasRestricted($context);
+                break;
+
             default:
                 $result = true;
                 break;   
@@ -241,13 +236,15 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
 	/**
-     * 
-     * Checks allowed articles, exluded categories/articles,... for component COM_CONTENT
+     * Checks allowed articles and excluded categories/articles,... for component Joomla! content (com_content).
+     *
      * @param object $article
      * @param string $context
+     *
+     * @return boolean
      */
     private function isContentRestricted(&$article, $context) {
-        
+
         // Check for correct context
         if(false === strpos($context, "com_content")) {
            return true;
@@ -280,7 +277,7 @@ class plgContentITPSocialButtons extends JPlugin {
         settype($excludeArticles, 'array');
         JArrayHelper::toInteger($excludeArticles);
         
-        // Exluded categories
+        // Excluded categories
         $excludedCats           = $this->params->get('excludeCats');
         if(!empty($excludedCats)){
             $excludedCats = explode(',', $excludedCats);
@@ -295,22 +292,115 @@ class plgContentITPSocialButtons extends JPlugin {
         }
         settype($includedArticles, 'array');
         JArrayHelper::toInteger($includedArticles);
-        
+
+        if(!isset($article->id)) {
+            $this->loadArticleData($article);
+        }
+
         if(!in_array($article->id, $includedArticles)) {
-            // Check exluded articles
-            if(in_array($article->id, $excludeArticles) OR in_array($article->catid, $excludedCats)){
-                return true;
+
+            // Check excluded articles
+            if(strcmp("categories", $this->currentView) != 0) {
+                if(in_array($article->id, $excludeArticles) OR in_array($article->catid, $excludedCats)){
+                    return true;
+                }
             }
         }
-        
+
+        // @todo Remove this when language is provided.
+        if((empty($article->language)) AND (strcmp("categories", $this->currentView) != 0)) {
+            $this->prepareLanguage($article);
+        }
+
         return false;
     }
-    
+
     /**
-     * 
-     * This method does verification for K2 restrictions
-     * @param jIcalEventRepeat $article
+     * Load language.
+     *
+     * @param $article
+     * @todo remove this when language is provided on view "category".
+     */
+    public function prepareLanguage($article) {
+
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true);
+
+        $query
+            ->select("a.language")
+            ->from($db->quoteName("#__content", "a"))
+            ->where("a.id = " . (int)$article->id);
+
+        $db->setQuery($query, 0, 1);
+        $result = $db->loadResult();
+
+        $article->language = $result;
+
+    }
+
+
+    /**
+     * Load article data from database.
+     *
+     * @param $article
+     *
+     * @return void
+     *
+     * @todo Remove this method when all data be provided.
+     */
+    protected function loadArticleData(&$article) {
+
+        switch($this->currentView) {
+
+            case "categories":
+
+                if(!JString::trim($article->text)) {
+                    return;
+                }
+
+                $hash   = md5($article->text);
+
+                // Load data from database or cache.
+                if(!isset($this->cache[$hash])) {
+
+                    $db = JFactory::getDbo();
+                    $query = $db->getQuery(true);
+
+                    $query
+                        ->select("a.id, a.title, a.metadesc, a.language, ". $query->concatenate(array("a.id", "a.alias"), ":") ." AS slug")
+                        ->from($db->quoteName("#__categories", "a"))
+                        ->where("a.extension = " . $db->quote("com_content"))
+                        ->where("MD5(a.description) = " .$db->quote($hash));
+
+                    $db->setQuery($query);
+                    $result = $db->loadObject();
+
+                    $this->cache[$hash] = (!empty($result)) ? $result : false;
+
+                } else {
+                    $result = $this->cache[$hash];
+                }
+
+                if(!empty($result)) {
+                    $article->id        = $result->id;
+                    $article->title     = $result->title;
+                    $article->slug      = $result->slug;
+                    $article->language  = $result->language;
+                }
+
+                break;
+        }
+
+    }
+
+    /**
+     * This method does verification for K2 restrictions.
+     *
+     * @param object $article
      * @param string $context
+     * @param JRegistry $params
+     *
+     * @return bool
      */
     private function isK2Restricted(&$article, $context, $params) {
         
@@ -341,7 +431,7 @@ class plgContentITPSocialButtons extends JPlugin {
         settype($excludeArticles, 'array');
         JArrayHelper::toInteger($excludeArticles);
         
-        // Exluded categories
+        // Excluded categories
         $excludedCats           = $this->params->get('k2_exclude_cats');
         if(!empty($excludedCats)){
             $excludedCats = explode(',', $excludedCats);
@@ -370,8 +460,8 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
 	/**
-     * 
-     * Prepare some elements of the K2 object
+     * Prepare some elements of the K2 object.
+     *
      * @param object $article
      * @param JRegistry $params
      */
@@ -386,10 +476,12 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
     /**
-     * 
-     * This method does verification for JEvents restrictions
+     * This method does verification for JEvents restrictions.
+     *
      * @param jIcalEventRepeat $article
      * @param string $context
+     *
+     * @return bool
      */
     private function isJEventsRestricted(&$article, $context) {
         
@@ -419,10 +511,11 @@ class plgContentITPSocialButtons extends JPlugin {
     /**
      * Do verification for Vip Quotes extension. Is it restricted?
      *
-     * @param ojbect $article
      * @param string $context
+     *
+     * @return bool
      */
-    private function isVipQuotesRestricted(&$article, $context) {
+    private function isVipQuotesRestricted($context) {
     
         // Check for correct context
         if(strpos($context, "com_vipquotes") === false) {
@@ -447,15 +540,43 @@ class plgContentITPSocialButtons extends JPlugin {
     
         return false;
     }
-    
+
+    /**
+     * Do verification for UserIdeas extension. Is it restricted?
+     *
+     * @param string $context
+     *
+     * @return bool
+     */
+    private function isUserIdeasRestricted($context) {
+
+        // Check for correct context
+        if(strpos($context, "com_userideas") === false) {
+            return true;
+        }
+
+        // Display only in view 'details'
+        if(strcmp($this->currentView, "details") != 0) {
+            return true;
+        }
+
+        $displayOnViewDetails  = $this->params->get('userideas_display_details', 0);
+        if(!$displayOnViewDetails){
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * 
      * This method does verification for VirtueMart restrictions.
      * 
-     * @param stdClass $article
      * @param string $context
+     *
+     * @return bool
      */
-    private function isVirtuemartRestricted(&$article, $context) {
+    private function isVirtuemartRestricted($context) {
             
         // Check for correct context
         if(strpos($context, "com_virtuemart") === false) {
@@ -478,47 +599,16 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
 	/**
-     * It's a method that verify restriction for the component "com_myblog".
-     * 
-     * @param object $article
+     * It's a method that verify restriction for the component "com_vipportfolio".
+     *
      * @param string $context
+     *
+     * @return bool
      */
-	private function isMyBlogRestricted(&$article, $context) {
+	private function isVipPortfolioRestricted($context) {
 
         // Check for correct context
-        if(strpos($context, "myblog") === false) {
-           return true;
-        }
-        
-	    // Display content only in the task "view"
-        if(strcmp("view", $this->currentTask) != 0){
-            return true;
-        }
-        
-        // Check for enabled option for that extensions
-        if(!$this->params->get('mbDisplay', 0)){
-            return true;
-        }
-        
-        return false;
-    }
-    
-	/**
-     * 
-     * It's a method that verify restriction for the component "com_vipportfolio"
-     * @param object $article
-     * @param string $context
-     */
-	private function isVipPortfolioRestricted(&$article, $context) {
-
-        // Check for correct context
-        if(strpos($context, "com_vipportfolio") === false) {
-           return true;
-        }
-        
-	    // Verify the option for displaying in layout "lineal"
-        $displayInLineal     = $this->params->get('vipportfolio_lineal', 0);
-        if(!$displayInLineal){
+        if(false === strpos($context, "com_vipportfolio.details")) {
             return true;
         }
         
@@ -528,10 +618,11 @@ class plgContentITPSocialButtons extends JPlugin {
 	/**
      * It's a method that verify restriction for the component "com_zoo".
      * 
-     * @param object $article
      * @param string $context
+     *
+     * @return bool
      */
-	private function isZooRestricted(&$article, $context) {
+	private function isZooRestricted($context) {
 	    
         // Check for correct context
         if(false === strpos($context, "com_zoo")) {
@@ -564,10 +655,11 @@ class plgContentITPSocialButtons extends JPlugin {
 	/**
      * It's a method that verify restriction for the component "com_easyblog".
      * 
-     * @param object $article
      * @param string $context
+     *
+     * @return bool
      */
-	private function isEasyBlogRestricted(&$article, $context) {
+	private function isEasyBlogRestricted($context) {
 	    
 	    
         $allowedViews = array("categories", "entry", "latest", "tags");   
@@ -609,10 +701,12 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
 	/**
-     * 
-     * It's a method that verify restriction for the component "com_joomshopping"
+     * It's a method that verify restriction for the component "com_joomshopping".
+     *
      * @param object $article
      * @param string $context
+     *
+     * @return bool
      */
 	private function isJoomShoppingRestricted(&$article, $context) {
         
@@ -631,12 +725,13 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
 	/**
-     * 
-     * It's a method that verify restriction for the component "com_hikashop"
-     * @param object $article
+     * It's a method that verify restriction for the component "com_hikashop".
+     *
      * @param string $context
+     *
+     * @return bool
      */
-	private function isHikaShopRestricted(&$article, $context) {
+	private function isHikaShopRestricted($context) {
 	    
         // Check for correct context
         if(false === strpos($context, "text")) {
@@ -656,29 +751,31 @@ class plgContentITPSocialButtons extends JPlugin {
         
         return false;
     }
-    
-    private function getUrl(&$article, $context) {
 
-        $uri = "";
-        $url = JURI::getInstance();
-        $domain= $url->getScheme() ."://" . $url->getHost();
-        
+    private function getUrl(&$article) {
+
+        $url    = JURI::getInstance();
+        $domain = $url->getScheme() ."://" . $url->getHost();
+
+        $filter = JFilterInput::getInstance();
+        $domain = $filter->clean($domain);
+
         switch($this->currentOption) {
+
             case "com_content":
-            	
-            	// It's an implementation of "com_myblog"
-            	// I don't know why but $option contains "com_content" for a value
-            	// I hope it will be fixed in the future versions of "com_myblog"
-            	if(strcmp($context, "com_myblog") != 0) {
-                	$uri = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catslug), false);
-                	break;
-            	}
-            	
-            case "com_myblog":
-                $uri = $article->permalink;
-                break;    
-                
-                
+
+                if(strcmp("categories", $this->currentView) == 0) {
+                    $uri = JRoute::_(ContentHelperRoute::getCategoryRoute($article->slug, $article->language), false);
+                } else {
+                    // @todo remove this when catslug is provided in Joomla! 2.5
+                    if(!isset($article->catslug)) {
+                        $article->catslug = $article->catid;
+                    }
+                    $uri = JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catslug, $article->language), false);
+                }
+
+                break;
+
             case "com_k2":
                 $uri = $article->link;
                 break;
@@ -718,7 +815,11 @@ class plgContentITPSocialButtons extends JPlugin {
             case "com_vipquotes":
                 $uri = $article->link;
                 break;
-                
+
+            case "com_userideas":
+                $uri = JRoute::_($article->link, false);;
+                break;
+
             default:
                 $uri = "";
                 break;   
@@ -729,10 +830,13 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
 	/**
-     * 
-     * Generate a URI based on currend URL
+     * Generate a URI based on current URL.
+     *
+     * @param JUri $url
+     *
+     * @return string
      */
-    private function getCurrentURI($url) {
+    private function getCurrentURI(JUri $url) {
         
         $uri    = $url->getPath();
         if($url->getQuery()) {
@@ -742,26 +846,22 @@ class plgContentITPSocialButtons extends JPlugin {
         return $uri;
             
     }
-    
-    private function getTitle(&$article, $context) {
+
+    /**
+     * Get a title from extension objects.
+     *
+     * @param mixed $article
+     * @return string
+     */
+    private function getTitle(&$article) {
         
         $title = "";
         
         switch($this->currentOption) {
             case "com_content":
-            	
-            	// It's an implementation of "com_myblog"
-            	// I don't know why but $option contains "com_content" for a value
-            	// I hope it will be fixed in the future versions of "com_myblog"
-            	if(strcmp($context, "com_myblog") != 0) {
-            		$title= $article->title;
-            		break;
-            	}
-                
-            case "com_myblog":
                 $title= $article->title;
-                break;    
-                
+                break;
+
             case "com_k2":
                 $title= $article->title;
                 break;
@@ -809,7 +909,11 @@ class plgContentITPSocialButtons extends JPlugin {
             case "com_vipquotes":
                 $title = $article->title;
                 break;
-                
+
+            case "com_userideas":
+                $title = $article->title;
+                break;
+
             default:
                 $title = "";
                 break;   
@@ -820,14 +924,16 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
     /**
-     * 
-     * Generate the HTML code with buttons
+     * Generate the HTML code with buttons.
+     *
      * @param object $article
+     *
+     * @return string
      */
-    private function getContent(&$article, $context){
+    private function getContent(&$article){
         
-        $url    = $base = rawurlencode( $this->getUrl($article, $context) );
-        $title  = rawurlencode( $this->getTitle($article, $context) );
+        $url    = $base = rawurlencode( $this->getUrl($article) );
+        $title  = rawurlencode( $this->getTitle($article) );
         
         // Convert the url to short one
         if($this->params->get("shortUrlService")) {
@@ -854,13 +960,13 @@ class plgContentITPSocialButtons extends JPlugin {
             $html .= $this->getFacebookButton($title, $url);
         }
         if($this->params->get("displayGoogle")) {
-            $html .= $this->getGoogleButton($title, $url);
+            $html .= $this->getGoogleButton($url);
         }
         if($this->params->get("displaySumbleUpon")) {
             $html .= $this->getStumbleuponButton($title, $base);
         }
         if($this->params->get("displayTechnorati")) {
-            $html .= $this->getTechnoratiButton($title, $url);            
+            $html .= $this->getTechnoratiButton($url);
         }
         if($this->params->get("displayTwitter")) {
             $html .= $this->getTwitterButton($title, $url);
@@ -878,15 +984,15 @@ class plgContentITPSocialButtons extends JPlugin {
     }
     
 	/**
-     * A method that make a long url to short url
+     * A method that make a long url to short url.
      * 
      * @param string $link
-     * @param array $params
+     *
      * @return string
      */
     private function getShortUrl($link){
         
-        JLoader::register("ItpSocialButtonsPluginShortUrl", dirname(__FILE__).DIRECTORY_SEPARATOR."shorturl.php");
+        JLoader::register("ItpSocialButtonsPluginShortUrl", JPATH_PLUGINS .DIRECTORY_SEPARATOR. "itpsocialbuttons" .DIRECTORY_SEPARATOR. "shorturl.php");
         
         $options = array(
             "login"     => $this->params->get("login"),
@@ -924,9 +1030,9 @@ class plgContentITPSocialButtons extends JPlugin {
      * Generate a code for the extra buttons. 
      * Is also replace indicators {URL} and {TITLE} with that of the article.
      * 
-     * @param string $title Article Title
-     * @param string $url   Article URL
-     * @param array $params Plugin parameters
+     * @param string    $title Article Title
+     * @param string    $url   Article URL
+     * @param JRegistry $params Plugin parameters
      * 
      * @return string
      */
@@ -963,6 +1069,8 @@ class plgContentITPSocialButtons extends JPlugin {
      * 
      * @param string $imageSrc
      * @param string $link
+     *
+     * @return string
      */
     private function sendToFriendIcon($imageSrc, $link) {
         
@@ -1007,7 +1115,7 @@ class plgContentITPSocialButtons extends JPlugin {
         return '<a href="http://www.facebook.com/sharer.php?u=' . $link . '&amp;t=' . $title . '" title="' . JText::sprintf("PLG_CONTENT_ITPSOCIALBUTTONS_SUBMIT", "Facebook") . '" target="blank" ><img src="' . $img_url . '" alt="' . JText::sprintf("PLG_CONTENT_ITPSOCIALBUTTONS_SUBMIT", "Facebook") . '" /></a>';
     }
     
-    private function getGoogleButton($title, $link){
+    private function getGoogleButton($link){
         
         $img_url = $this->plgUrlPath . "images/" . $this->params->get('icons_package') . "/google.png";
         
@@ -1021,7 +1129,7 @@ class plgContentITPSocialButtons extends JPlugin {
         return '<a href="http://www.stumbleupon.com/submit?url=' . $link . '&amp;title=' . $title . '" title="' . JText::sprintf("PLG_CONTENT_ITPSOCIALBUTTONS_SUBMIT", "Stumbleupon") . '" target="blank" ><img src="' . $img_url . '" alt="' . JText::sprintf("PLG_CONTENT_ITPSOCIALBUTTONS_SUBMIT", "Stumbleupon") . '" /></a>';
     }
     
-    private function getTechnoratiButton($title, $link){
+    private function getTechnoratiButton($link){
         
         $img_url = $this->plgUrlPath . "images/" . $this->params->get('icons_package') . "/technorati.png";
         

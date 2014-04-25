@@ -1,30 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.1" type="plugin" group="content" method="upgrade">
+<extension version="3.2" type="plugin" group="content" method="upgrade">
     <name>PLG_CONTENT_ITPSOCIALBUTTONS</name>
     <author>Todor Iliev</author>
-    <copyright>Copyright (C) 2013 Todor Iliev ( ITPrism.com ). All rights reserved.</copyright>
+    <copyright>Copyright (C) 2014 Todor Iliev ( ITPrism.com ). All rights reserved.</copyright>
     <license>http://www.gnu.org/copyleft/gpl.html</license>
     <authorEmail>todor@itprism.com</authorEmail>
     <authorUrl>http://itprism.com</authorUrl>
-    <version>2.2</version>
-    <creationDate>21 October, 2013</creationDate>
+    <version>2.3</version>
+    <creationDate>25 April, 2014</creationDate>
     <description><![CDATA[
     <p><a href="http://itprism.com/free-joomla-extensions/social-marketing-seo/multi-share-buttons" target="_blank">ITPSocialButtons</a> is a plugin that adds social network buttons on your page.</p><p><a href='http://itprism.com/help/35-social-buttons-documentation-faq' target='_blank'>Read documentation</a> that will help you to setup the extensions.</p>
     <p>Invest in the extension improvement and <a href="http://itprism.com/sponsorship" target="_blank">sponsor it via SMS, PayPal and Bitcoin</a>.</p>
     <p><a href="http://itprism.com/" target="_blank">Subscribe for the newsletter</a> to receive information about updates and new ITPrism extensions.</p>
     <p>Please, vote for the plugin on <a href="http://extensions.joomla.org/extensions/social-web/social-bookmarking/14094" target="_blank">Joomla! Extensions Directory</a></p>
     ]]></description>
-	<languages folder="language">
-		<language tag="en-GB">en-GB/en-GB.plg_content_itpsocialbuttons.ini</language>
-		<language tag="en-GB">en-GB/en-GB.plg_content_itpsocialbuttons.sys.ini</language>
-	</languages>
+
     <files>
         <filename plugin="itpsocialbuttons">itpsocialbuttons.php</filename>
 		<filename>index.html</filename>
 		<filename>style.css</filename>
 		<filename>shorturl.php</filename>
 		<filename>README.md</filename>
+
 		<folder>images</folder>
+		<folder>language</folder>
     </files>
     
     <help url="PLG_CONTENT_ITPSOCIALBUTTONS_HELP_URL"/>
@@ -279,12 +278,19 @@
                    <option value="0">JNO</option>
                    <option value="1">JYES</option>
                 </field>
+
+                <field name="spacer8" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_USERIDEAS_SETTINGS" />
+                <field name="userideas_display_details" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_USERIDEAS_DISPLAY_IN_DETAILS" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_DETAILS_DESC" class="btn-group">
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
                 
-                <field name="spacer8" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_ITPSOCIALBUTTONS_SETTINGS" />
+                <field name="spacer9" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_ITPSOCIALBUTTONS_SETTINGS" />
                 <field name="loadCss" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE" description="PLG_CONTENT_ITPSOCIALBUTTONS_LOAD_STYLE_DESC" class="btn-group">
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
                 </field>
+
             </fieldset>
              
         </fields>

@@ -1,10 +1,15 @@
 ITPSocialButtons Plugin for Joomla! 
 ==========================
-( Version 2.2 )
+( Version 2.3 )
 - - -
 
 Changelog
 ---------
+
+###v2.3
+* Added functionality for sharing categories.
+* Added support for User Ideas.
+* Remove support for MyBlog.
 
 ###v2.2
 
