@@ -249,12 +249,6 @@
                    <option value="1">JYES</option>
                 </field>
                 
-			    <field name="spacer3" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_MYBLOG_SETTINGS" />
-			    <field name="mbDisplay" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_POST" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_POST_DESC" class="btn-group">
-                   <option value="0">JNO</option>
-                   <option value="1">JYES</option>
-                </field>
-                
 			    <field name="spacer4" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_VIPPORTFOLIO_SETTINGS" />
 			    <field name="vipportfolio_lineal" type="radio" default="1" label="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LINEAL" description="PLG_CONTENT_ITPSOCIALBUTTONS_DISPLAY_IN_LINEAL_DESC" class="btn-group">
                    <option value="0">JNO</option>
