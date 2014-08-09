@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension version="3.2" type="plugin" group="content" method="upgrade">
+<extension version="3.3" type="plugin" group="content" method="upgrade">
     <name>PLG_CONTENT_ITPSOCIALBUTTONS</name>
     <author>Todor Iliev</author>
     <copyright>Copyright (C) 2014 Todor Iliev ( ITPrism.com ). All rights reserved.</copyright>
     <license>http://www.gnu.org/copyleft/gpl.html</license>
     <authorEmail>todor@itprism.com</authorEmail>
     <authorUrl>http://itprism.com</authorUrl>
-    <version>2.3</version>
-    <creationDate>25 April, 2014</creationDate>
+    <version>2.4</version>
+    <creationDate>09 August, 2014</creationDate>
     <description><![CDATA[
     <p><a href="http://itprism.com/free-joomla-extensions/social-marketing-seo/multi-share-buttons" target="_blank">ITPSocialButtons</a> is a plugin that adds social network buttons on your page.</p><p><a href='http://itprism.com/help/35-social-buttons-documentation-faq' target='_blank'>Read documentation</a> that will help you to setup the extensions.</p>
     <p>Invest in the extension improvement and <a href="http://itprism.com/sponsorship" target="_blank">sponsor it via SMS, PayPal and Bitcoin</a>.</p>
