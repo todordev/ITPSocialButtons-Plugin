@@ -6,14 +6,16 @@
     <license>http://www.gnu.org/copyleft/gpl.html</license>
     <authorEmail>todor@itprism.com</authorEmail>
     <authorUrl>http://itprism.com</authorUrl>
-    <version>2.4</version>
-    <creationDate>09 August, 2014</creationDate>
+    <version>2.5</version>
+    <creationDate>18 November, 2014</creationDate>
     <description><![CDATA[
     <p><a href="http://itprism.com/free-joomla-extensions/social-marketing-seo/multi-share-buttons" target="_blank">ITPSocialButtons</a> is a plugin that adds social network buttons on your page.</p><p><a href='http://itprism.com/help/35-social-buttons-documentation-faq' target='_blank'>Read documentation</a> that will help you to setup the extensions.</p>
     <p>Invest in the extension improvement and <a href="http://itprism.com/sponsorship" target="_blank">sponsor it via SMS, PayPal and Bitcoin</a>.</p>
     <p><a href="http://itprism.com/" target="_blank">Subscribe for the newsletter</a> to receive information about updates and new ITPrism extensions.</p>
     <p>Please, vote for the plugin on <a href="http://extensions.joomla.org/extensions/social-web/social-bookmarking/14094" target="_blank">Joomla! Extensions Directory</a></p>
     ]]></description>
+
+    <help url="PLG_CONTENT_ITPSOCIALBUTTONS_HELP_URL"/>
 
     <files>
         <filename plugin="itpsocialbuttons">itpsocialbuttons.php</filename>
@@ -25,9 +27,7 @@
 		<folder>images</folder>
 		<folder>language</folder>
     </files>
-    
-    <help url="PLG_CONTENT_ITPSOCIALBUTTONS_HELP_URL"/>
-    
+
     <config>
 		<fields name="params">
 			<fieldset name="basic">
@@ -285,6 +285,11 @@
                     <option value="1">JYES</option>
                 </field>
 
+                <field name="spacer10" type="spacer" class="text" label="PLG_CONTENT_ITPSOCIALBUTTONS_PRINT_TITLE" />
+                <field name="print_link_type" type="list" default="0" label="PLG_CONTENT_ITPSOCIALBUTTONS_PRINT_LINK_TYPE" description="PLG_CONTENT_ITPSOCIALBUTTONS_PRINT_LINK_TYPE_DESC">
+                    <option value="0">PLG_CONTENT_ITPSOCIALBUTTONS_LINK</option>
+                    <option value="1">PLG_CONTENT_ITPSOCIALBUTTONS_POPUP</option>
+                </field>
             </fieldset>
              
         </fields>

@@ -1,6 +1,9 @@
 ITPSocialButtons Plugin Release Notes
 =====================================
 
+###v2.5
+* Added a print button functionality.
+
 ###v2.4
 * Fixed the path to the class ItpSocialButtonsPluginShortUrl.
 * Improved

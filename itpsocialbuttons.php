@@ -10,8 +10,6 @@
 // no direct access
 defined('_JEXEC') or die;
 
-jimport('joomla.plugin.plugin');
-
 /**
  * ITPSocialButtons Plugin
  *
@@ -972,6 +970,18 @@ class plgContentITPSocialButtons extends JPlugin
                     }
                 }
 
+                // Parse ITPrism markup
+                if (false !== strpos($extraButton, "<itp:print")) {
+                    $matches = array();
+                    if (preg_match('/src="([^"]*)"/i', $extraButton, $matches)) {
+                        if (!$this->params->get("print_link_type", 0)) {
+                            $extraButton = $this->printIconLink($matches[1]);
+                        } else {
+                            $extraButton = $this->printIconPopup($matches[1], $url);
+                        }
+                    }
+                }
+
                 $extraButton = str_replace("{URL}", $url, $extraButton);
                 $extraButton = str_replace("{TITLE}", $title, $extraButton);
                 $html .= $extraButton;
@@ -1002,16 +1012,64 @@ class plgContentITPSocialButtons extends JPlugin
 
         $status = 'width=400,height=350,menubar=yes,resizable=yes';
 
-        $attribs = array(
+        $attributes = array(
             'title'   => JText::_('JGLOBAL_EMAIL'),
             'onclick' => "window.open(this.href,'win2','" . $status . "'); return false;"
         );
 
         $text = '<img src="' . $imageSrc . '" alt="' . JText::_('PLG_CONTENT_ITPSOCIALBUTTONS_SHARE_WITH_FRIENDS') . '" title="' . JText::_('PLG_CONTENT_ITPSOCIALBUTTONS_SHARE_WITH_FRIENDS') . '" />';
 
-        $output = JHtml::_('link', $url, $text, $attribs);
+        return JHtml::_('link', $url, $text, $attributes);
+    }
 
-        return $output;
+    /**
+     * Generate a link that prints current page.
+     *
+     * @param string $imageSrc
+     *
+     * @return string
+     */
+    private function printIconLink($imageSrc)
+    {
+        $icon = '<img src="' . $imageSrc . '" alt="' . JText::_('PLG_CONTENT_ITPSOCIALBUTTONS_PRINT_THIS_PAGE') . '" title="' . JText::_('PLG_CONTENT_ITPSOCIALBUTTONS_PRINT_THIS_PAGE') . '" />';
+
+        return '<a href="#" onclick="window.print();return false;">' . $icon . '</a>';
+    }
+
+    /**
+     * Generate a popup window that prints current page.
+     *
+     * @param string $imageSrc
+     * @param string $link
+     *
+     * @return string
+     */
+    private function printIconPopup($imageSrc, $link)
+    {
+        $app = JFactory::getApplication();
+
+        $link = rawurldecode($link);
+
+        // Set the number of page.
+        $page = "";
+        if ($app->input->getInt("limitstart")) {
+            $page = "&page=".$app->input->getInt("limitstart");
+        }
+
+        // Generate an URL
+        $url  = $link . '?tmpl=component&print=1&layout=default' . $page;
+
+        $status = 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no';
+
+        $attributes = array(
+            'title'   => JText::_('JGLOBAL_PRINT'),
+            'onclick' => "window.open(this.href,'win2','" . $status . "'); return false;",
+            'rel'     => 'nofollow'
+        );
+
+        $text = '<img src="' . $imageSrc . '" alt="' . JText::_('PLG_CONTENT_ITPSOCIALBUTTONS_PRINT_THIS_PAGE') . '" title="' . JText::_('PLG_CONTENT_ITPSOCIALBUTTONS_PRINT_THIS_PAGE') . '" />';
+
+        return JHtml::_('link', $url, $text, $attributes);
     }
 
     private function getDeliciousButton($title, $link)

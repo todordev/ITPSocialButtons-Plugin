@@ -1,6 +1,6 @@
 ITPSocialButtons Plugin for Joomla! 
 ==========================
-( Version 2.4 )
+( Version 2.5 )
 - - -
 
 ITPSocialButtons is a Joomla! plugin that adds sharing buttons of the most popular social networks.
