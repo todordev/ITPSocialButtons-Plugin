@@ -796,7 +796,8 @@ class plgContentITPSocialButtons extends JPlugin
                     $title = JString::trim($article->title());
                     if (!$title) {
                         $doc = JFactory::getDocument();
-                        /**  @var $doc JDocumentHtml * */
+                        /**  @var $doc JDocumentHtml */
+
                         $title = $doc->getTitle();
                     }
                 };
@@ -813,7 +814,8 @@ class plgContentITPSocialButtons extends JPlugin
 
             case "com_zoo":
                 $doc = JFactory::getDocument();
-                /**  @var $doc JDocumentHtml * */
+                /**  @var $doc JDocumentHtml */
+
                 $title = $doc->getTitle();
                 break;
 
@@ -858,14 +860,81 @@ class plgContentITPSocialButtons extends JPlugin
             $url = $this->getShortUrl($url);
         }
 
+        $buttons = $this->generateButtons($title, $url, $base);
+
         $html = '<div class="itp-social-buttons-box">';
 
-        if ($this->params->get('showTitle')) {
-            $html .= '<h4>' . $this->params->get('title') . '</h4>';
+        switch ($this->params->get('showTitle', 1)) {
+
+            case 1: // Top Side
+                $html .= $this->generateTopTitle($buttons);
+                break;
+
+            case 2: // Left Side
+                $html .= $this->generateLeftSideTitle($buttons);
+                break;
+
+            default: // Without Side
+                $html .= $this->generateWithoutTitle($buttons);
+                break;
         }
+
+
+        $html .= '</div>';
+
+        return $html;
+    }
+
+    protected function generateLeftSideTitle($buttons)
+    {
+        $html  = '<div class="' . $this->params->get('displayLines') . '">';
+
+        $html .= '<h4 class="itp-sb-left-side-title">' . $this->params->get('title') . '</h4>';
+
+        $html .= '<div class="itp-sb-left-side-icons ' . $this->params->get('displayIcons') . '">';
+
+        $html .= $buttons;
+
+        $html .= "</div>";
+        $html .= '<div class="itp-sb-clear-both"></div>';
+        $html .= "</div>";
+
+        return $html;
+    }
+
+    protected function generateTopTitle($buttons)
+    {
+        $html = '<h4>' . $this->params->get('title') . '</h4>';
 
         $html .= '<div class="' . $this->params->get('displayLines') . '">';
         $html .= '<div class="' . $this->params->get('displayIcons') . '">';
+
+        $html .= $buttons;
+
+        $html .= "</div>";
+        $html .= '<div class="itp-sb-clear-both"></div>';
+        $html .= "</div>";
+
+        return $html;
+    }
+
+    protected function generateWithoutTitle($buttons)
+    {
+        $html = '<div class="' . $this->params->get('displayLines') . '">';
+        $html .= '<div class="' . $this->params->get('displayIcons') . '">';
+
+        $html .= $buttons;
+
+        $html .= "</div>";
+        $html .= '<div class="itp-sb-clear-both"></div>';
+        $html .= "</div>";
+
+        return $html;
+    }
+
+    protected function generateButtons($title, $url, $base)
+    {
+        $html = "";
 
         // Prepare buttons
         if ($this->params->get("displayDelicious")) {
@@ -895,8 +964,6 @@ class plgContentITPSocialButtons extends JPlugin
 
         // Get additional social buttons
         $html .= $this->getExtraButtons($title, $url, $this->params);
-
-        $html .= '</div></div></div>';
 
         return $html;
     }

@@ -1,34 +1,25 @@
 .itp-social-buttons-box {
   width: 100%;
-  display:block;
-  overflow:hidden;
-  clear:both;
+  display: block;
 }
 
 .itp-social-buttons-box h4 {
-	margin-top: 10px;
-	margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 .itp-sb-left a{
-	border:0 !important;
+	border: none;
 	margin-right: 5px;
 }
 
-.itp-sb-right a{
-	border:0 !important;
-	margin-left: 5px;
-}
-
-.itp-sb-center a{
-	border:0 !important;
+.itp-sb-right a, .itp-sb-center a{
+	border: none;
 	margin-left: 5px;
 }
 
 .itp-sbb-nl{
   border-top: none;
   border-bottom: none;
-  
 }
 
 .itp-sbb-tl{
@@ -38,7 +29,7 @@
 }
 
 .itp-sbb-bl{
-    border-top: none;
+  border-top: none;
   border-bottom: thin solid #808080;
   padding-bottom:5px;
 }
@@ -48,9 +39,7 @@
   border-bottom: thin solid #808080;
   padding-top: 5px;
   padding-bottom:5px;
-  overflow:hidden;
 }
-
 
 .itp-sb-left{
 	padding-top: 10px;
@@ -65,6 +54,23 @@
 .itp-sb-center{
     margin-left: auto;
     margin-right: auto;
-    text-align:center !important;
+    text-align:center;
     padding-top: 10px;
+}
+
+.itp-sb-left-side-title {
+   display: block;
+	width: 10%;
+	float: left;
+	padding-top: 10px;
+}
+
+.itp-sb-left-side-icons {
+	display: block;
+	float: left;
+	width: 89%;
+}
+
+.itp-sb-clear-both {
+	clear: both;
 }
