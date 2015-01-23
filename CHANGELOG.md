@@ -3,6 +3,7 @@ ITPSocialButtons Plug-in Release Notes
 
 ###v2.6
 * Added option to display the title on the left side next to the icons.
+* Typo
 
 ###v2.5
 * Added a print button functionality.
